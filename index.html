@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grace Jermstad — Multidisciplinary Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,900&family=Montserrat:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fefefe;--bg2:#f7f5f1;--ink:#2a2419;--muted:#807a6b;--line:#e4ded1;
+    --pink:#e85d8a;--pink-text:#c0345f;
+    --peri:#8b8ce8;--peri-text:#5556c4;
+    --green:#24625c;--green-text:#1f5e58;
+    --red:#e53d68;--red-text:#b8203f;
+    --blue:#2b6cc4;--blue-text:#2563b0;
+    --olive:#7f7e45;--olive-text:#5f5e33;
+    --slate:#4a5a68;
+    --serif:"Fraunces",Georgia,serif;--sans:"Montserrat",sans-serif;--mono:"Space Mono",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.6}
+  ::selection{background:var(--pink);color:#fff}
+  :focus-visible{outline:3px solid var(--pink-text);outline-offset:3px;border-radius:3px}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  /* ===== LAYOUT: sticky rail + scrolling work ===== */
+  .shell{display:grid;grid-template-columns:340px 1fr;min-height:100vh}
+
+  /* ----- LEFT RAIL ----- */
+  .rail{position:sticky;top:0;height:100vh;padding:48px 38px;display:flex;flex-direction:column;border-right:1px solid var(--line);background:var(--bg)}
+  .rail .top{flex:0 0 auto}
+  .rail .name{font-family:var(--serif);font-size:2rem;font-weight:600;letter-spacing:-.02em;line-height:1.04}
+  .rail .name .dot{color:var(--pink)}
+  .rail .role{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--pink-text);margin-top:14px;text-transform:uppercase}
+  .rail .bio{font-size:.92rem;font-weight:300;color:var(--ink);margin-top:22px;max-width:250px;line-height:1.65}
+
+  .rail nav{margin-top:40px;display:flex;flex-direction:column;gap:2px}
+  .rail .navgroup{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted);margin:18px 0 10px}
+  .rail .navgroup:first-child{margin-top:0}
+  .rail .navlink{display:flex;align-items:baseline;gap:10px;padding:7px 0;font-family:var(--serif);font-size:1.18rem;font-weight:400;color:var(--ink);transition:color .25s,transform .25s;cursor:pointer}
+  .rail .navlink .idx{font-family:var(--mono);font-size:10px;color:var(--muted);transition:color .25s}
+  .rail .navlink:hover{transform:translateX(6px)}
+  .rail .navlink[data-accent="peri"]:hover, .rail .navlink[data-accent="peri"]:hover .idx{color:var(--peri-text)}
+  .rail .navlink[data-accent="green"]:hover, .rail .navlink[data-accent="green"]:hover .idx{color:var(--green-text)}
+  .rail .navlink[data-accent="red"]:hover, .rail .navlink[data-accent="red"]:hover .idx{color:var(--red-text)}
+  .rail .navlink[data-accent="blue"]:hover, .rail .navlink[data-accent="blue"]:hover .idx{color:var(--blue-text)}
+  .rail .navlink[data-accent="olive"]:hover, .rail .navlink[data-accent="olive"]:hover .idx{color:var(--olive-text)}
+  .rail .navlink[data-accent="slate"]:hover, .rail .navlink[data-accent="slate"]:hover .idx{color:var(--slate)}
+  .rail .navlink[data-accent="pink"]:hover, .rail .navlink[data-accent="pink"]:hover .idx{color:var(--pink-text)}
+
+  .rail .foot{margin-top:auto;padding-top:24px;font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:7px}
+  .rail .foot a{transition:color .25s}
+  .rail .foot a:hover{color:var(--pink-text)}
+
+  /* ----- RIGHT: WORK ----- */
+  .work{padding:48px 48px 0}
+  .work .intro{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:10px}
+  .work .intro h1{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,2rem);font-weight:400;letter-spacing:-.01em}
+  .work .intro .scrollcue{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted)}
+
+  /* big three */
+  .heroes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .tile{position:relative;border-radius:14px;overflow:hidden;background:var(--bg2);cursor:pointer;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s,flex .5s;border:1px solid var(--line)}
+  .tile .ph{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+  .tile.big{aspect-ratio:1/1}
+  .tile.small{aspect-ratio:1/1}
+  .tile .meta{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;background:linear-gradient(to top,var(--fill,rgba(20,18,14,.96)) 30%,color-mix(in srgb,var(--fill,rgba(20,18,14,1)) 78%,transparent) 65%,color-mix(in srgb,var(--fill,rgba(20,18,14,1)) 35%,transparent));opacity:0;transition:opacity .45s}
+  .tile:hover .meta, .tile.active .meta{opacity:1}
+  .tile:hover .ph, .tile.active .ph{transform:scale(1.06)}
+  .tile .meta .k{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:#fff;opacity:.95;text-transform:uppercase}
+  .tile .meta .t{font-family:var(--serif);font-size:1.5rem;font-weight:500;color:#fff;margin-top:7px;line-height:1.05}
+  .tile .meta .d{font-size:.82rem;font-weight:300;color:#fff;opacity:1;margin-top:8px;max-width:90%}
+  .tile .meta .go{font-family:var(--mono);font-size:11px;color:#fff;margin-top:14px;display:inline-flex;align-items:center;gap:6px}
+  /* smaller tiles (four across) — scale text down so it all fits */
+  .tile.small .meta{padding:16px}
+  .tile.small .meta .k{font-size:8.5px;letter-spacing:1px}
+  .tile.small .meta .t{font-size:1.05rem;margin-top:5px;line-height:1.08}
+  .tile.small .meta .d{font-size:.72rem;margin-top:6px;line-height:1.45;max-width:100%}
+  .tile.small .meta .go{font-size:9.5px;margin-top:10px}
+  /* color rail at top of each tile via accent */
+  .tile .bar{position:absolute;top:0;left:0;right:0;height:4px;z-index:2;transform:scaleX(0);transform-origin:left;transition:transform .45s}
+  .tile:hover .bar, .tile.active .bar{transform:scaleX(1)}
+  .tile[data-accent="peri"] .bar{background:var(--peri)} .tile[data-accent="peri"].active{box-shadow:0 18px 50px -18px var(--peri)}
+  .tile[data-accent="green"] .bar{background:var(--green)} .tile[data-accent="green"].active{box-shadow:0 18px 50px -18px var(--green)}
+  .tile[data-accent="red"] .bar{background:var(--red)} .tile[data-accent="red"].active{box-shadow:0 18px 50px -18px var(--red)}
+  .tile[data-accent="blue"] .bar{background:var(--blue)} .tile[data-accent="blue"].active{box-shadow:0 18px 50px -18px var(--blue)}
+  .tile[data-accent="olive"] .bar{background:var(--olive)} .tile[data-accent="olive"].active{box-shadow:0 18px 50px -18px var(--olive)}
+  .tile[data-accent="slate"] .bar{background:var(--slate)} .tile[data-accent="slate"].active{box-shadow:0 18px 50px -18px var(--slate)}
+  .tile[data-accent="pink"] .bar{background:var(--pink)} .tile[data-accent="pink"].active{box-shadow:0 18px 50px -18px var(--pink)}
+  /* hover overlay fill — deep brand color, charcoal for Fine Art */
+  .tile[data-accent="peri"] .meta{--fill:rgba(74,75,184,.93)}
+  .tile[data-accent="green"] .meta{--fill:rgba(20,58,54,.94)}
+  .tile[data-accent="red"] .meta{--fill:rgba(150,24,52,.93)}
+  .tile[data-accent="blue"] .meta{--fill:rgba(20,64,120,.93)}
+  .tile[data-accent="olive"] .meta{--fill:rgba(58,58,28,.94)}
+  .tile[data-accent="slate"] .meta{--fill:rgba(40,52,62,.94)}
+  .tile[data-accent="pink"] .meta{--fill:rgba(34,30,22,.94)}
+  .tile.active{transform:translateY(-8px) scale(1.018)}
+
+  /* placeholder-style colored tiles (no photo yet) */
+  .tile .swatch{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2.4rem;font-weight:600;color:#fff;letter-spacing:-.02em}
+  .tile[data-accent="blue"] .swatch{background:var(--blue)}
+  .tile[data-accent="olive"] .swatch{background:var(--olive)}
+
+  /* smaller grid */
+  .more-head{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--muted);margin:54px 0 18px;padding-top:30px;border-top:1px solid var(--line)}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+  /* about + footer */
+  .about{margin-top:90px;padding-top:48px;border-top:1px solid var(--line);max-width:680px}
+  .about .k{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--pink-text);margin-bottom:18px}
+  .about h2{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.3rem);font-weight:500;letter-spacing:-.02em;line-height:1.15;margin-bottom:20px}
+  .about h2 em{font-style:italic;color:var(--pink-text)}
+  .about p{font-size:1rem;font-weight:300;color:var(--ink);margin-bottom:16px}
+  .about .more{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--pink-text);border-bottom:1px solid var(--pink);padding-bottom:3px}
+
+  footer{margin-top:80px;padding:48px 0 56px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
+  footer .ft-name{font-family:var(--serif);font-size:1.5rem;font-weight:500}
+  footer .ft-links{display:flex;gap:20px;font-family:var(--mono);font-size:12px}
+  footer .ft-links a{color:var(--muted);transition:color .25s}
+  footer .ft-links a:hover{color:var(--pink-text)}
+  footer .ft-copy{font-family:var(--mono);font-size:10px;color:var(--muted);width:100%;margin-top:8px}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+  /* ===== MOBILE ===== */
+  .menubtn{display:none}
+  @media(max-width:900px){
+    .shell{grid-template-columns:1fr}
+    .rail{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:32px 24px}
+    .rail .bio{max-width:none}
+    .rail nav{margin-top:26px}
+    .rail .foot{margin-top:28px}
+    .work{padding:32px 24px 0}
+    .heroes{grid-template-columns:1fr;gap:14px}
+    .tile.big{aspect-ratio:4/3}
+    .grid{grid-template-columns:1fr 1fr}
+    .tile .meta{opacity:1;background:linear-gradient(to top,rgba(20,18,14,.8),transparent 60%)}
+    .tile .bar{transform:scaleX(1)}
+  }
+  @media(max-width:520px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ===== LEFT RAIL ===== -->
+  <aside class="rail">
+    <div class="top">
+      <div class="name">Grace<br>Jermstad<span class="dot">.</span></div>
+      <div class="role">Multidisciplinary Designer</div>
+      <p class="bio">I make things for people, across UX, branding, and product. A systems thinker who's happiest in the messy middle, turning research and a love of craft into work that gets used.</p>
+    </div>
+
+    <nav>
+      <div class="navgroup">CASE STUDIES</div>
+      <a class="navlink" data-tile="cece" data-accent="peri" href="cece.html"><span class="idx">01</span> Cece</a>
+      <a class="navlink" data-tile="pretium" data-accent="green" href="pretium.html"><span class="idx">02</span> Pretium</a>
+      <a class="navlink" data-tile="nomad" data-accent="red" href="nomad.html"><span class="idx">03</span> Nomad</a>
+
+      <div class="navgroup">MORE WORK</div>
+      <a class="navlink" data-tile="lakeshore" data-accent="blue" href="lakeshore.html"><span class="idx">04</span> Lakeshore Collective</a>
+      <a class="navlink" data-tile="littlewren" data-accent="olive" href="littlewren.html"><span class="idx">05</span> Little Wren Cafe</a>
+      <a class="navlink" data-tile="koehler" data-accent="slate" href="koehler.html"><span class="idx">06</span> Koehler Industries</a>
+      <a class="navlink" data-tile="art" data-accent="pink" href="art.html"><span class="idx">07</span> Fine Art</a>
+
+      <div class="navgroup">INFO</div>
+      <a class="navlink" data-accent="pink" href="about.html"><span class="idx">→</span> About</a>
+    </nav>
+
+    <div class="foot">
+      <a href="mailto:gracejermstad@gmail.com">gracejermstad@gmail.com</a>
+      <div><a href="https://www.linkedin.com/in/gracejermstad" target="_blank" rel="noopener">LinkedIn</a></div>
+    </div>
+  </aside>
+
+  <!-- ===== RIGHT: WORK ===== -->
+  <main class="work">
+    <div class="intro">
+      <h1>Selected work</h1>
+      <span class="scrollcue">SCROLL ↓</span>
+    </div>
+
+    <!-- big three -->
+    <section class="heroes">
+      <a class="tile big reveal" id="tile-cece" data-accent="peri" href="cece.html">
+        <span class="bar"></span>
+        <img class="ph" src="images/tile-cece.webp" alt="Cece the Counting Caterpillar toy">
+        <div class="meta">
+          <div class="k">Product / UX</div>
+          <div class="t">Cece</div>
+          <div class="d">An educational infant toy, from research to a tested final product.</div>
+          <span class="go">View case study →</span>
+        </div>
+      </a>
+      <a class="tile big reveal" id="tile-pretium" data-accent="green" href="pretium.html">
+        <span class="bar"></span>
+        <img class="ph" src="images/tile-pretium.webp" alt="Pretium rebrand on a warehouse wall">
+        <div class="meta">
+          <div class="k">Branding</div>
+          <div class="t">Pretium</div>
+          <div class="d">A full rebrand uniting a rigid-packaging company under one bold identity.</div>
+          <span class="go">View case study →</span>
+        </div>
+      </a>
+      <a class="tile big reveal" id="tile-nomad" data-accent="red" href="nomad.html">
+        <span class="bar"></span>
+        <img class="ph" src="images/tile-nomad.webp" alt="Nomad app screens">
+        <div class="meta">
+          <div class="k">Strategy / Product</div>
+          <div class="t">Nomad</div>
+          <div class="d">Brand and product built around a real venture thesis.</div>
+          <span class="go">View case study →</span>
+        </div>
+      </a>
+    </section>
+
+    <!-- more work -->
+    <div class="more-head">MORE WORK</div>
+    <section class="grid">
+      <a class="tile small reveal" id="tile-lakeshore" data-accent="blue" href="lakeshore.html">
+        <span class="bar"></span>
+        <img class="ph" src="images/tile-lakeshore.webp" alt="The Lakeshore Collective community space rendering">
+        <div class="meta">
+          <div class="k">Environmental</div>
+          <div class="t">The Lakeshore Collective</div>
+          <div class="d">Speculative design turning shoreline waste into community.</div>
+          <span class="go">View project →</span>
+        </div>
+      </a>
+      <a class="tile small reveal" id="tile-littlewren" data-accent="olive" href="littlewren.html">
+        <span class="bar"></span>
+        <img class="ph" src="images/tile-littlewren.webp" alt="Little Wren Cafe logo on a storefront window">
+        <div class="meta">
+          <div class="k">Brand Identity</div>
+          <div class="t">Little Wren Cafe</div>
+          <div class="d">A whimsical café brand built on contrast and birdwatching.</div>
+          <span class="go">View project →</span>
+        </div>
+      </a>
+      <a class="tile small reveal" id="tile-koehler" data-accent="slate" href="koehler.html">
+        <span class="bar"></span>
+        <img class="ph" src="images/tile-koehler.webp" alt="Koehler Industries logo on a building">
+        <div class="meta">
+          <div class="k">Brand Identity</div>
+          <div class="t">Koehler Industries</div>
+          <div class="d">An industrial rebrand for a tool-and-die manufacturer.</div>
+          <span class="go">View project →</span>
+        </div>
+      </a>
+      <a class="tile small reveal" id="tile-art" data-accent="pink" href="art.html">
+        <span class="bar"></span>
+        <img class="ph" src="images/tile-art.webp" alt="Fine art gallery">
+        <div class="meta">
+          <div class="k">Fine Art</div>
+          <div class="t">Studio Work</div>
+          <div class="d">Painting, drawing, print & craft — a gallery of personal work.</div>
+          <span class="go">View gallery →</span>
+        </div>
+      </a>
+    </section>
+
+    <!-- about -->
+    <section class="about reveal" id="about">
+      <div class="k">A LITTLE ABOUT ME</div>
+      <h2>I'm a designer who loves <em>making things for people.</em></h2>
+      <p>I work across the whole stack of making — UX/UI, branding, product, and the occasional ceramic bowl. I bring a lot of energy to a team, I'm not afraid of a bad idea, and I care about craft in all its forms.</p>
+      <p>My background spans agency branding, entrepreneurial product work, and a fine-art practice, which is exactly the range I try to bring to every problem.</p>
+      <a class="more" href="about.html">More about me →</a>
+    </section>
+
+    <footer>
+      <div class="ft-name">Grace Jermstad</div>
+      <div class="ft-links">
+        <a href="mailto:gracejermstad@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/gracejermstad" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="ft-copy">© 2026 Grace Jermstad — Designed & built by me.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  // reveal on scroll
+  const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in')});},{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // nav hover -> enlarge/activate matching tile
+  document.querySelectorAll('.rail .navlink[data-tile]').forEach(link=>{
+    const tile=document.getElementById('tile-'+link.dataset.tile);
+    if(!tile)return;
+    link.addEventListener('mouseenter',()=>tile.classList.add('active'));
+    link.addEventListener('mouseleave',()=>tile.classList.remove('active'));
+    link.addEventListener('focus',()=>tile.classList.add('active'));
+    link.addEventListener('blur',()=>tile.classList.remove('active'));
+  });
+</script>
+</body>
+</html>

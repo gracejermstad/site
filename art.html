@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fine Art — Grace Jermstad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Montserrat:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fefefe;--bg2:#f7f5f1;--ink:#2a2419;--muted:#807a6b;--line:#e4ded1;
+    --pink:#e85d8a;--pink-text:#c0345f;--pink-deep:#a82b52;--pink-soft:#fbe4ec;
+    --serif:"Fraunces",Georgia,serif;--sans:"Montserrat",sans-serif;--mono:"Space Mono",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+  ::selection{background:var(--pink);color:#fff}
+  :focus-visible{outline:3px solid var(--pink-text);outline-offset:3px;border-radius:3px}
+  img{max-width:100%;display:block}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:22px 48px;background:linear-gradient(var(--bg),rgba(254,254,254,0))}
+  nav .back{font-family:var(--mono);font-size:12px;color:var(--ink);text-decoration:none;opacity:.8;transition:color .3s,opacity .3s}
+  nav .back:hover{opacity:1;color:var(--pink-text)}
+  nav .back::before{content:"← ";color:var(--pink-text)}
+  nav .logo{font-family:var(--serif);font-size:17px;font-weight:500;color:var(--ink);text-decoration:none}
+
+  .wrap{max-width:1200px;margin:0 auto;padding:0 48px}
+
+  /* HEADER */
+  header.top{padding:160px 0 60px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--pink-text);margin-bottom:24px}
+  .eyebrow .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--pink);margin-right:10px;vertical-align:middle}
+  h1.title{font-family:var(--serif);font-size:clamp(3rem,9vw,6.5rem);line-height:.95;font-weight:600;letter-spacing:-.03em;margin-bottom:32px}
+  .lede{font-family:var(--serif);font-size:clamp(1.25rem,2.4vw,1.8rem);font-weight:300;line-height:1.45;max-width:780px;color:var(--ink)}
+  .lede em{font-style:italic;color:var(--pink-text)}
+
+  /* SKILL TAGS */
+  .tags{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
+  .tag{border:1px solid var(--pink);border-radius:30px;padding:11px 20px;font-size:.92rem;font-weight:400;background:transparent;color:var(--pink-text);transition:background .3s,transform .3s}
+  .tag:hover{background:var(--pink-soft);transform:translateY(-3px)}
+
+  /* MASONRY GALLERY */
+  .gallery{column-count:3;column-gap:18px;margin-top:20px;padding-bottom:40px}
+  .gallery figure{margin:0 0 18px;break-inside:avoid;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--bg2);position:relative;cursor:zoom-in}
+  .gallery img{width:100%;display:block;transition:transform .5s ease}
+  .gallery figure:hover img{transform:scale(1.04)}
+  .gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.3px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.7));opacity:0;transition:opacity .35s}
+  .gallery figure:hover figcaption{opacity:1}
+
+  @media(max-width:900px){.gallery{column-count:2}}
+  @media(max-width:560px){
+    nav{padding:18px 24px}
+    .wrap{padding:0 24px}
+    header.top{padding:130px 0 40px}
+    .gallery{column-count:1}
+  }
+
+  /* LIGHTBOX */
+  .lb{position:fixed;inset:0;background:rgba(20,18,14,.94);display:none;align-items:center;justify-content:center;z-index:1000;padding:40px;cursor:zoom-out}
+  .lb.open{display:flex}
+  .lb img{max-width:92vw;max-height:88vh;width:auto;height:auto;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .lb .x{position:absolute;top:24px;right:30px;color:#fff;font-family:var(--mono);font-size:13px;letter-spacing:1px;cursor:pointer;opacity:.8}
+  .lb .x:hover{opacity:1}
+  .lb .nav-arrow{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2.5rem;cursor:pointer;opacity:.6;transition:opacity .3s;user-select:none;padding:20px}
+  .lb .nav-arrow:hover{opacity:1}
+  .lb .prev{left:10px}.lb .next{right:10px}
+
+  /* NEXT */
+  .next{display:flex;justify-content:space-between;align-items:center;padding:50px 0 90px;flex-wrap:wrap;gap:20px;border-top:1px solid var(--line)}
+  .next a{text-decoration:none;color:var(--ink)}
+  .next .nlbl{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:1px}
+  .next .ntitle{font-family:var(--serif);font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:500;transition:color .3s}
+  .next a:hover .ntitle{color:var(--pink-text)}
+  .next .home{font-family:var(--mono);font-size:12px;color:var(--pink-text);text-decoration:none}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="back" href="index.html">All work</a>
+  <a class="logo" href="index.html">Grace Jermstad</a>
+</nav>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="dot"></span>Fine Art · Personal Work</div>
+    <h1 class="title reveal">Fine Art</h1>
+    <p class="lede reveal">A collection of my fine artwork, exploring themes of <em>identity and emotion</em> across different mediums. Making these pieces is both a passion and a hobby, and a fulfilling way to express myself creatively.</p>
+    <div class="tags reveal">
+      <span class="tag">Attention to detail</span>
+      <span class="tag">Multidisciplinary expertise</span>
+      <span class="tag">Effective composition</span>
+      <span class="tag">Visualizing &amp; depicting ideas</span>
+      <span class="tag">Creative experimentation</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="gallery reveal" id="gallery">
+    <figure><img src="images/art01-winged-victory.webp" alt="Charcoal drawing of the Winged Victory of Samothrace sculpture." loading="lazy"><figcaption>The Winged Victory — charcoal</figcaption></figure>
+    <figure><img src="images/art21-mountains.webp" alt="Layered watercolor landscape of snowy mountains, patterned hills, and a blue lake under a pink sun." loading="lazy"><figcaption>Mountain layers — watercolor &amp; mixed media</figcaption></figure>
+    <figure><img src="images/art07-kafka-teacups.webp" alt="Bold digital illustration of two red teacups by a window with a Kafka quote." loading="lazy"><figcaption>Kafka teacups — digital illustration</figcaption></figure>
+    <figure><img src="images/art04-portrait-white.webp" alt="White-on-black chalk portrait of a face emerging from darkness." loading="lazy"><figcaption>Portrait — white chalk on black</figcaption></figure>
+    <figure><img src="images/art02-deer-mirror.webp" alt="Ink illustration of a deer reflected in a car's side mirror." loading="lazy"><figcaption>Reflection — ink &amp; wash</figcaption></figure>
+    <figure><img src="images/art10-summer-eye.webp" alt="Detailed watercolor and ink piece of an eye with a cigarette and text reading 'now I'm needing you on a summer day'." loading="lazy"><figcaption>Summer Day — watercolor &amp; ink</figcaption></figure>
+    <figure><img src="images/art12-copenhagen.webp" alt="Watercolor of colorful Copenhagen townhouses with a color swatch study." loading="lazy"><figcaption>Copenhagen façades — watercolor</figcaption></figure>
+    <figure><img src="images/art16-graphic-abstract.webp" alt="Black and white graphic composition of abstract eyes and flowing shapes." loading="lazy"><figcaption>Asymmetry study — ink</figcaption></figure>
+    <figure><img src="images/art06-stilllife.webp" alt="Graphite still life of a skull, glass bottles, and a tin can on draped fabric." loading="lazy"><figcaption>Still life — graphite</figcaption></figure>
+    <figure><img src="images/art13-sharks.webp" alt="Watercolor of a hammerhead shark and a reef shark swimming in blue water." loading="lazy"><figcaption>Sharks — watercolor</figcaption></figure>
+    <figure><img src="images/art20-comic-face.webp" alt="Blue-toned ink comic panel of a tired face with light hair." loading="lazy"><figcaption>Comic panel — ink &amp; marker</figcaption></figure>
+    <figure><img src="images/art05-rundetaarn.webp" alt="Watercolor of the vaulted stone arches of the Rundetaarn in Copenhagen." loading="lazy"><figcaption>Rundetaarn — watercolor</figcaption></figure>
+    <figure><img src="images/art09-eye-studies.webp" alt="Two eye studies, one in white on black paper and one in graphite on tan paper." loading="lazy"><figcaption>Eye studies — chalk &amp; graphite</figcaption></figure>
+    <figure><img src="images/art17-danish-flag.webp" alt="Watercolor of a Danish flag hanging against a neutral wall." loading="lazy"><figcaption>Dannebrog — watercolor</figcaption></figure>
+    <figure><img src="images/art11-wooden-box.webp" alt="A handcrafted ash wood box with finger-jointed corners and a fitted lid." loading="lazy"><figcaption>Joined box — ash wood</figcaption></figure>
+    <figure><img src="images/art19-comic-bunny.webp" alt="Blue-toned ink comic panel of a hand reaching for a bunny-shaped alarm clock." loading="lazy"><figcaption>Comic panel — ink &amp; marker</figcaption></figure>
+    <figure><img src="images/art03-deer-road.webp" alt="Ink illustration of a deer lying on a road with a flower." loading="lazy"><figcaption>On the road — ink &amp; wash</figcaption></figure>
+    <figure><img src="images/art08-accordion-book.webp" alt="A folded accordion artist book covered in intricate graphite patterns." loading="lazy"><figcaption>Pattern accordion book — graphite</figcaption></figure>
+    <figure><img src="images/art15-side-table.webp" alt="A handmade wooden side table with tapered legs and a metal drawer." loading="lazy"><figcaption>Side table — wood &amp; metal</figcaption></figure>
+    <figure><img src="images/art14-comic-phone.webp" alt="Blue-toned ink comic panel of a face beside a phone." loading="lazy"><figcaption>Comic panel — ink &amp; marker</figcaption></figure>
+    <figure><img src="images/art18-tool-sketches.webp" alt="Graphite sketch study of overlapping tools and objects." loading="lazy"><figcaption>Object studies — graphite</figcaption></figure>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="next">
+    <a href="index.html#range"><div class="nlbl">← MORE PROJECTS</div><div class="ntitle">Back to the work</div></a>
+    <a class="home" href="index.html">↑ All work</a>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <span class="x" id="lbClose">CLOSE ✕</span>
+  <span class="nav-arrow prev" id="lbPrev">‹</span>
+  <img id="lbImg" src="" alt="">
+  <span class="nav-arrow next" id="lbNext">›</span>
+</div>
+
+<script>
+  const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in')});},{threshold:.05});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Lightbox
+  const imgs=[...document.querySelectorAll('#gallery img')];
+  const lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg');
+  let cur=0;
+  function show(i){cur=(i+imgs.length)%imgs.length;lbImg.src=imgs[cur].src;lbImg.alt=imgs[cur].alt;lb.classList.add('open');}
+  imgs.forEach((im,i)=>im.addEventListener('click',()=>show(i)));
+  document.getElementById('lbClose').addEventListener('click',()=>lb.classList.remove('open'));
+  document.getElementById('lbPrev').addEventListener('click',e=>{e.stopPropagation();show(cur-1);});
+  document.getElementById('lbNext').addEventListener('click',e=>{e.stopPropagation();show(cur+1);});
+  lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('open');});
+  document.addEventListener('keydown',e=>{
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')lb.classList.remove('open');
+    if(e.key==='ArrowLeft')show(cur-1);
+    if(e.key==='ArrowRight')show(cur+1);
+  });
+</script>
+</body>
+</html>
