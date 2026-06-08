@@ -1,16 +1,14 @@
 # Grace Jermstad — Portfolio
 
-A custom-built portfolio site (vanilla HTML/CSS/JS).
+Custom static portfolio (vanilla HTML/CSS/JS). No build step.
 
-## Structure
-- `index.html` — home page (work grid + nav)
-- `about.html` — about page (includes résumé download)
+## Files
+- `index.html` — home  ·  `about.html` — about (résumé download)
 - `art.html` — fine art gallery
 - `cece.html`, `nomad.html` — case studies
-- `koehler.html`, `littlewren.html`, `lakeshore.html` — project pages
-- `images/` — all site images (WebP)
+- `koehler.html`, `littlewren.html`, `lakeshore.html` — projects
+- `images/` — all images (WebP)  ·  `favicon.svg` — site icon
 - `Grace-Jermstad-Resume.pdf` — résumé
 
-## Deploying
-Static site, no build step. Host the folder as-is on Vercel,
-Netlify, or GitHub Pages. `index.html` is the entry point.
+## Deploy
+Host the folder as-is on Vercel / Netlify / GitHub Pages. Entry point: index.html
