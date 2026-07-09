@@ -4,166 +4,166 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fine Art — Grace Jermstad</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiBmb250LWZhbWlseT0iT3V0Zml0LCBzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNzAwIiBmb250LXNpemU9IjU4IiBsZXR0ZXItc3BhY2luZz0iLTMiIGZpbGw9IiMyYTI0MTkiPkdKPHRzcGFuIGZpbGw9IiNlODVkOGEiPi48L3RzcGFuPjwvdGV4dD4KPC9zdmc+Cg==" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Montserrat:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#fefefe;--bg2:#f7f5f1;--ink:#2a2419;--muted:#807a6b;--line:#e4ded1;
-    --pink:#e85d8a;--pink-text:#c0345f;--pink-deep:#a82b52;--pink-soft:#fbe4ec;
-    --serif:"Fraunces",Georgia,serif;--sans:"Montserrat",sans-serif;--mono:"Space Mono",monospace;
-  }
+  :root{--bg:#fefefe;--bg2:#f7f5f1;--ink:#2a2419;--muted:#807a6b;--line:#e4ded1;
+    --pink:#e85d8a;--pink-text:#c0345f;
+    --accent:#e85d8a;--accent-text:#c0345f;--accent-soft:#fbe4ec;--accent-deep:#a02347;--body:"Outfit",sans-serif;}
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--ink);font-family:var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
-  ::selection{background:var(--pink);color:#fff}
-  :focus-visible{outline:3px solid var(--pink-text);outline-offset:3px;border-radius:3px}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--accent);color:#fff}
+  :focus-visible{outline:3px solid var(--accent-text);outline-offset:3px;border-radius:3px}
+  a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
-
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:22px 48px;background:linear-gradient(var(--bg),rgba(254,254,254,0))}
-  nav .back{font-family:var(--mono);font-size:12px;color:var(--ink);text-decoration:none;opacity:.8;transition:color .3s,opacity .3s}
-  nav .back:hover{opacity:1;color:var(--pink-text)}
-  nav .back::before{content:"← ";color:var(--pink-text)}
-  nav .logo{font-family:var(--serif);font-size:17px;font-weight:500;color:var(--ink);text-decoration:none}
-
-  .wrap{max-width:1200px;margin:0 auto;padding:0 48px}
-
-  /* HEADER */
-  header.top{padding:160px 0 60px}
-  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--pink-text);margin-bottom:24px}
-  .eyebrow .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--pink);margin-right:10px;vertical-align:middle}
-  h1.title{font-family:var(--serif);font-size:clamp(3rem,9vw,6.5rem);line-height:.95;font-weight:600;letter-spacing:-.03em;margin-bottom:32px}
-  .lede{font-family:var(--serif);font-size:clamp(1.25rem,2.4vw,1.8rem);font-weight:300;line-height:1.45;max-width:780px;color:var(--ink)}
-  .lede em{font-style:italic;color:var(--pink-text)}
-
-  /* SKILL TAGS */
-  .tags{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
-  .tag{border:1px solid var(--pink);border-radius:30px;padding:11px 20px;font-size:.92rem;font-weight:400;background:transparent;color:var(--pink-text);transition:background .3s,transform .3s}
-  .tag:hover{background:var(--pink-soft);transform:translateY(-3px)}
-
-  /* MASONRY GALLERY */
-  .gallery{column-count:3;column-gap:18px;margin-top:20px;padding-bottom:40px}
-  .gallery figure{margin:0 0 18px;break-inside:avoid;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--bg2);position:relative;cursor:zoom-in}
-  .gallery img{width:100%;display:block;transition:transform .5s ease}
-  .gallery figure:hover img{transform:scale(1.04)}
-  .gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.3px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.7));opacity:0;transition:opacity .35s}
-  .gallery figure:hover figcaption{opacity:1}
-
-  @media(max-width:900px){.gallery{column-count:2}}
-  @media(max-width:560px){
-    nav{padding:18px 24px}
-    .wrap{padding:0 24px}
-    header.top{padding:130px 0 40px}
-    .gallery{column-count:1}
-  }
-
-  /* LIGHTBOX */
-  .lb{position:fixed;inset:0;background:rgba(20,18,14,.94);display:none;align-items:center;justify-content:center;z-index:1000;padding:40px;cursor:zoom-out}
-  .lb.open{display:flex}
-  .lb img{max-width:92vw;max-height:88vh;width:auto;height:auto;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-  .lb .x{position:absolute;top:24px;right:30px;color:#fff;font-family:var(--mono);font-size:13px;letter-spacing:1px;cursor:pointer;opacity:.8}
-  .lb .x:hover{opacity:1}
-  .lb .nav-arrow{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2.5rem;cursor:pointer;opacity:.6;transition:opacity .3s;user-select:none;padding:20px}
-  .lb .nav-arrow:hover{opacity:1}
-  .lb .prev{left:10px}.lb .next{right:10px}
-
-  /* NEXT */
-  .next{display:flex;justify-content:space-between;align-items:center;padding:50px 0 90px;flex-wrap:wrap;gap:20px;border-top:1px solid var(--line)}
-  .next a{text-decoration:none;color:var(--ink)}
-  .next .nlbl{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:1px}
-  .next .ntitle{font-family:var(--serif);font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:500;transition:color .3s}
-  .next a:hover .ntitle{color:var(--pink-text)}
-  .next .home{font-family:var(--mono);font-size:12px;color:var(--pink-text);text-decoration:none}
-
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+  .shell{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+  .rail{position:sticky;top:0;height:100vh;padding:40px 32px;display:flex;flex-direction:column;border-right:1px solid var(--line);background:var(--bg);overflow-y:auto}
+  .rail .name{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1.02}
+  .rail .name .dot{color:var(--pink)}
+  .rail .role{font-size:10px;font-weight:500;letter-spacing:2.5px;color:var(--pink-text);margin-top:12px;text-transform:uppercase}
+  .rail nav{margin-top:36px;display:flex;flex-direction:column;gap:1px}
+  .rail .navgroup{font-size:10px;font-weight:500;letter-spacing:2px;color:var(--muted);margin:16px 0 9px;text-transform:uppercase}
+  .rail .navgroup:first-child{margin-top:0}
+  .rail .navlink{display:flex;align-items:baseline;gap:9px;padding:6px 0;font-size:1rem;font-weight:400;color:var(--ink);transition:color .2s,transform .2s}
+  .rail .navlink .idx{font-size:10px;font-weight:500;letter-spacing:1px;color:var(--muted);transition:color .2s;min-width:16px}
+  .rail .navlink:hover{transform:translateX(5px);color:var(--accent-text)}
+  .rail .navlink:hover .idx{color:var(--accent-text)}
+  .rail .navlink.current{color:var(--accent-text);font-weight:600}
+  .rail .navlink.current .idx{color:var(--accent-text)}
+  .rail .foot{margin-top:auto;padding-top:24px;font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:7px}
+  .rail .foot a{transition:color .2s}
+  .rail .foot a:hover{color:var(--accent-text)}
+  .main{min-width:0}
+  .container{max-width:1320px;margin:0 auto;padding:0 clamp(14px,2.5vw,36px)}
+  .hero{padding:64px 0 40px}
+  .hero .eyebrow{font-size:11px;font-weight:500;letter-spacing:2.5px;color:var(--accent-text);text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:9px}
+  .hero .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block}
+  .hero h1{font-size:clamp(3.2rem,7vw,6rem);font-weight:700;letter-spacing:-.03em;line-height:.98}
+  .hero .lede{font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:300;color:var(--ink);max-width:820px;margin-top:24px;line-height:1.5}
+  .hero .lede em{font-style:normal;color:var(--accent-text);font-weight:500}
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+  .tag{font-size:.82rem;font-weight:400;color:var(--ink);background:var(--accent-soft);border-radius:999px;padding:8px 15px;transition:transform .3s cubic-bezier(.34,1.6,.64,1),background .25s,color .25s}
+  .tag:hover{background:var(--accent-text);color:#fff;transform:translateY(-3px) scale(1.06)}
+  .gallery{columns:3;column-gap:16px;padding:16px 0 40px}
+  @media(max-width:1100px){.gallery{columns:2}}
+  @media(max-width:620px){.gallery{columns:1}}
+  .gallery figure{break-inside:avoid;margin:0 0 16px;position:relative;border-radius:14px;overflow:hidden;background:var(--bg2);cursor:zoom-in;transition:transform .4s cubic-bezier(.34,1.4,.64,1),box-shadow .4s}
+  .gallery figure:hover{transform:translateY(-5px) scale(1.012);box-shadow:0 20px 44px -20px rgba(232,93,138,.5)}
+  .gallery img{width:100%;transition:transform .6s cubic-bezier(.34,1.3,.64,1)}
+  .gallery figure:hover img{transform:scale(1.05)}
+  .gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 16px 14px;font-size:12px;font-weight:500;letter-spacing:.2px;color:#fff;background:linear-gradient(transparent,rgba(42,36,25,.82));opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+  .gallery figure:hover figcaption{opacity:1;transform:none}
+  .next-row{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:20px;padding:44px 0 80px;border-top:1px solid var(--line)}
+  .next-row .back{font-size:12px;font-weight:500;letter-spacing:1px;color:var(--muted);text-transform:uppercase;transition:color .2s}
+  .next-row .back:hover{color:var(--accent-text)}
+  .next-row .next{text-align:right}
+  .next-row .next .lbl{font-size:11px;font-weight:500;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+  .next-row .next .t{font-size:1.9rem;font-weight:700;letter-spacing:-.02em;color:var(--ink);transition:color .2s}
+  .next-row .next:hover .t{color:var(--accent-text)}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
   .reveal.in{opacity:1;transform:none}
+  .lb{position:fixed;inset:0;background:rgba(26,22,16,.94);display:none;align-items:center;justify-content:center;z-index:100;padding:40px}
+  .lb.open{display:flex}
+  .lb img{max-width:90vw;max-height:88vh;border-radius:8px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+  .lb .x{position:absolute;top:24px;right:32px;font-size:12px;font-weight:600;letter-spacing:1.5px;color:#fff;cursor:pointer;opacity:.8;transition:opacity .2s}
+  .lb .x:hover{opacity:1}
+  .lb .arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:2.6rem;color:#fff;cursor:pointer;opacity:.65;transition:opacity .2s,transform .2s;user-select:none;padding:0 18px}
+  .lb .arrow:hover{opacity:1}
+  .lb .arrow.prev{left:12px}.lb .arrow.next{right:12px}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  @media(max-width:900px){.shell{grid-template-columns:1fr}.rail{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:24px}.hero{padding:40px 0 24px}}
 </style>
 </head>
 <body>
-
-<nav>
-  <a class="back" href="index.html">All work</a>
-  <a class="logo" href="index.html">Grace Jermstad</a>
+<div class="shell">
+  <aside class="rail">
+    <a href="index.html"><div class="name">Grace<br>Jermstad<span class="dot">.</span></div></a>
+    <div class="role">Multidisciplinary Designer</div>
+    <nav>      <div class="navgroup">Case Studies</div>
+      <a class="navlink" href="pretium.html" data-page="pretium"><span class="idx">01</span> Pretium</a>
+      <a class="navlink" href="nomad.html" data-page="nomad"><span class="idx">02</span> Nomad</a>
+      <div class="navgroup">More Work</div>
+      <a class="navlink" href="cece.html" data-page="cece"><span class="idx">03</span> Cece</a>
+      <a class="navlink" href="lakeshore.html" data-page="lakeshore"><span class="idx">04</span> Lakeshore Collective</a>
+      <a class="navlink" href="littlewren.html" data-page="littlewren"><span class="idx">05</span> Little Wren Cafe</a>
+      <a class="navlink" href="koehler.html" data-page="koehler"><span class="idx">06</span> Koehler Industries</a>
+      <a class="navlink" href="art.html" data-page="art"><span class="idx">07</span> Fine Art</a>
+      <div class="navgroup">Info</div>
+      <a class="navlink" href="about.html" data-page="about"><span class="idx">→</span> About</a>
 </nav>
-
-<header class="top">
-  <div class="wrap">
-    <div class="eyebrow reveal"><span class="dot"></span>Fine Art · Personal Work</div>
-    <h1 class="title reveal">Fine Art</h1>
-    <p class="lede reveal">A collection of my fine artwork, exploring themes of <em>identity and emotion</em> across different mediums. Making these pieces is both a passion and a hobby, and a fulfilling way to express myself creatively.</p>
-    <div class="tags reveal">
-      <span class="tag">Attention to detail</span>
-      <span class="tag">Multidisciplinary expertise</span>
-      <span class="tag">Effective composition</span>
-      <span class="tag">Visualizing &amp; depicting ideas</span>
-      <span class="tag">Creative experimentation</span>
+    <div class="foot">
+      <a href="mailto:gracejermstad@gmail.com">gracejermstad@gmail.com</a>
+      <a href="https://www.linkedin.com/in/gracejermstad" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-  </div>
-</header>
-
-<div class="wrap">
-  <div class="gallery reveal" id="gallery">
-    <figure><img src="images/art01-winged-victory.webp" alt="Charcoal drawing of the Winged Victory of Samothrace sculpture." loading="lazy"><figcaption>The Winged Victory — charcoal</figcaption></figure>
-    <figure><img src="images/art21-mountains.webp" alt="Layered watercolor landscape of snowy mountains, patterned hills, and a blue lake under a pink sun." loading="lazy"><figcaption>Mountain layers — watercolor &amp; mixed media</figcaption></figure>
-    <figure><img src="images/art07-kafka-teacups.webp" alt="Bold digital illustration of two red teacups by a window with a Kafka quote." loading="lazy"><figcaption>Kafka teacups — digital illustration</figcaption></figure>
-    <figure><img src="images/art04-portrait-white.webp" alt="White-on-black chalk portrait of a face emerging from darkness." loading="lazy"><figcaption>Portrait — white chalk on black</figcaption></figure>
-    <figure><img src="images/art02-deer-mirror.webp" alt="Ink illustration of a deer reflected in a car's side mirror." loading="lazy"><figcaption>Reflection — ink &amp; wash</figcaption></figure>
-    <figure><img src="images/art10-summer-eye.webp" alt="Detailed watercolor and ink piece of an eye with a cigarette and text reading 'now I'm needing you on a summer day'." loading="lazy"><figcaption>Summer Day — watercolor &amp; ink</figcaption></figure>
-    <figure><img src="images/art12-copenhagen.webp" alt="Watercolor of colorful Copenhagen townhouses with a color swatch study." loading="lazy"><figcaption>Copenhagen façades — watercolor</figcaption></figure>
-    <figure><img src="images/art16-graphic-abstract.webp" alt="Black and white graphic composition of abstract eyes and flowing shapes." loading="lazy"><figcaption>Asymmetry study — ink</figcaption></figure>
-    <figure><img src="images/art06-stilllife.webp" alt="Graphite still life of a skull, glass bottles, and a tin can on draped fabric." loading="lazy"><figcaption>Still life — graphite</figcaption></figure>
-    <figure><img src="images/art13-sharks.webp" alt="Watercolor of a hammerhead shark and a reef shark swimming in blue water." loading="lazy"><figcaption>Sharks — watercolor</figcaption></figure>
-    <figure><img src="images/art20-comic-face.webp" alt="Blue-toned ink comic panel of a tired face with light hair." loading="lazy"><figcaption>Comic panel — ink &amp; marker</figcaption></figure>
-    <figure><img src="images/art05-rundetaarn.webp" alt="Watercolor of the vaulted stone arches of the Rundetaarn in Copenhagen." loading="lazy"><figcaption>Rundetaarn — watercolor</figcaption></figure>
-    <figure><img src="images/art09-eye-studies.webp" alt="Two eye studies, one in white on black paper and one in graphite on tan paper." loading="lazy"><figcaption>Eye studies — chalk &amp; graphite</figcaption></figure>
-    <figure><img src="images/art17-danish-flag.webp" alt="Watercolor of a Danish flag hanging against a neutral wall." loading="lazy"><figcaption>Dannebrog — watercolor</figcaption></figure>
-    <figure><img src="images/art11-wooden-box.webp" alt="A handcrafted ash wood box with finger-jointed corners and a fitted lid." loading="lazy"><figcaption>Joined box — ash wood</figcaption></figure>
-    <figure><img src="images/art19-comic-bunny.webp" alt="Blue-toned ink comic panel of a hand reaching for a bunny-shaped alarm clock." loading="lazy"><figcaption>Comic panel — ink &amp; marker</figcaption></figure>
-    <figure><img src="images/art03-deer-road.webp" alt="Ink illustration of a deer lying on a road with a flower." loading="lazy"><figcaption>On the road — ink &amp; wash</figcaption></figure>
-    <figure><img src="images/art08-accordion-book.webp" alt="A folded accordion artist book covered in intricate graphite patterns." loading="lazy"><figcaption>Pattern accordion book — graphite</figcaption></figure>
-    <figure><img src="images/art15-side-table.webp" alt="A handmade wooden side table with tapered legs and a metal drawer." loading="lazy"><figcaption>Side table — wood &amp; metal</figcaption></figure>
-    <figure><img src="images/art14-comic-phone.webp" alt="Blue-toned ink comic panel of a face beside a phone." loading="lazy"><figcaption>Comic panel — ink &amp; marker</figcaption></figure>
-    <figure><img src="images/art18-tool-sketches.webp" alt="Graphite sketch study of overlapping tools and objects." loading="lazy"><figcaption>Object studies — graphite</figcaption></figure>
-  </div>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <section class="hero">
+        <div class="eyebrow"><span class="dot"></span>Fine Art · Personal Work</div>
+        <h1>Fine Art</h1>
+        <p class="lede">A collection of my fine artwork, exploring themes of <em>identity and emotion</em> across different mediums. Making these pieces is both a passion and a hobby, and a fulfilling way to express myself creatively.</p>
+        <div class="tags"><span class="tag">Attention to detail</span><span class="tag">Multidisciplinary expertise</span><span class="tag">Effective composition</span><span class="tag">Visualizing &amp; depicting ideas</span><span class="tag">Creative experimentation</span></div>
+      </section>
+    </div>
+    <div class="container">
+      <div class="gallery reveal" id="gallery">
+    <figure><img src="images/art-00.webp" alt="Charcoal drawing of the Winged Victory of Samothrace sculpture." loading="lazy"><figcaption>The Winged Victory — charcoal</figcaption></figure>
+    <figure><img src="images/art-01.webp" alt="Layered watercolor landscape of snowy mountains, patterned hills, and a blue lake under a pink sun." loading="lazy"><figcaption>Mountain layers — watercolor &amp; mixed media</figcaption></figure>
+    <figure><img src="images/art-02.webp" alt="Bold digital illustration of two red teacups by a window with a Kafka quote." loading="lazy"><figcaption>Kafka teacups — digital illustration</figcaption></figure>
+    <figure><img src="images/art-03.webp" alt="White-on-black chalk portrait of a face emerging from darkness." loading="lazy"><figcaption>Portrait — white chalk on black</figcaption></figure>
+    <figure><img src="images/art-04.webp" alt="Ink illustration of a deer reflected in a car's side mirror." loading="lazy"><figcaption>Reflection — ink &amp; wash</figcaption></figure>
+    <figure><img src="images/art-05.webp" alt="Detailed watercolor and ink piece of an eye with a cigarette and text reading 'now I'm needing you on a summer day'." loading="lazy"><figcaption>Summer Day — watercolor &amp; ink</figcaption></figure>
+    <figure><img src="images/art-06.webp" alt="Watercolor of colorful Copenhagen townhouses with a color swatch study." loading="lazy"><figcaption>Copenhagen façades — watercolor</figcaption></figure>
+    <figure><img src="images/art-07.webp" alt="Black and white graphic composition of abstract eyes and flowing shapes." loading="lazy"><figcaption>Asymmetry study — ink</figcaption></figure>
+    <figure><img src="images/art-08.webp" alt="Graphite still life of a skull, glass bottles, and a tin can on draped fabric." loading="lazy"><figcaption>Still life — graphite</figcaption></figure>
+    <figure><img src="images/art-09.webp" alt="Watercolor of a hammerhead shark and a reef shark swimming in blue water." loading="lazy"><figcaption>Sharks — watercolor</figcaption></figure>
+    <figure><img src="images/art-10.webp" alt="Blue-toned ink comic panel of a tired face with light hair." loading="lazy"><figcaption>Comic panel — ink &amp; marker</figcaption></figure>
+    <figure><img src="images/art-11.webp" alt="Watercolor of the vaulted stone arches of the Rundetaarn in Copenhagen." loading="lazy"><figcaption>Rundetaarn — watercolor</figcaption></figure>
+    <figure><img src="images/art-12.webp" alt="Two eye studies, one in white on black paper and one in graphite on tan paper." loading="lazy"><figcaption>Eye studies — chalk &amp; graphite</figcaption></figure>
+    <figure><img src="images/art-13.webp" alt="Watercolor of a Danish flag hanging against a neutral wall." loading="lazy"><figcaption>Dannebrog — watercolor</figcaption></figure>
+    <figure><img src="images/art-14.webp" alt="A handcrafted ash wood box with finger-jointed corners and a fitted lid." loading="lazy"><figcaption>Joined box — ash wood</figcaption></figure>
+    <figure><img src="images/art-15.webp" alt="Blue-toned ink comic panel of a hand reaching for a bunny-shaped alarm clock." loading="lazy"><figcaption>Comic panel — ink &amp; marker</figcaption></figure>
+    <figure><img src="images/art-16.webp" alt="Ink illustration of a deer lying on a road with a flower." loading="lazy"><figcaption>On the road — ink &amp; wash</figcaption></figure>
+    <figure><img src="images/art-17.webp" alt="A folded accordion artist book covered in intricate graphite patterns." loading="lazy"><figcaption>Pattern accordion book — graphite</figcaption></figure>
+    <figure><img src="images/art-18.webp" alt="A handmade wooden side table with tapered legs and a metal drawer." loading="lazy"><figcaption>Side table — wood &amp; metal</figcaption></figure>
+    <figure><img src="images/art-19.webp" alt="Blue-toned ink comic panel of a face beside a phone." loading="lazy"><figcaption>Comic panel — ink &amp; marker</figcaption></figure>
+    <figure><img src="images/art-20.webp" alt="Graphite sketch study of overlapping tools and objects." loading="lazy"><figcaption>Object studies — graphite</figcaption></figure>
+    </div>
+    </div>
+    <div class="container">
+      <div class="next-row">
+        <a class="back" href="index.html">↑ Back to all work</a>
+        <a class="next" href="pretium.html"><div class="lbl">Next →</div><div class="t">Pretium</div></a>
+      </div>
+    </div>
+  </main>
 </div>
-
-<div class="wrap">
-  <div class="next">
-    <a href="index.html#range"><div class="nlbl">← MORE PROJECTS</div><div class="ntitle">Back to the work</div></a>
-    <a class="home" href="index.html">↑ All work</a>
-  </div>
-</div>
-
-<!-- LIGHTBOX -->
 <div class="lb" id="lb">
   <span class="x" id="lbClose">CLOSE ✕</span>
-  <span class="nav-arrow prev" id="lbPrev">‹</span>
+  <span class="arrow prev" id="lbPrev">‹</span>
   <img id="lbImg" src="" alt="">
-  <span class="nav-arrow next" id="lbNext">›</span>
+  <span class="arrow next" id="lbNext">›</span>
 </div>
-
 <script>
-  const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in')});},{threshold:.05});
+  const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in')})},{threshold:.05});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
+  document.querySelectorAll('.rail .navlink').forEach(l=>{if(l.getAttribute('data-page')==='art')l.classList.add('current')});
   // Lightbox
-  const imgs=[...document.querySelectorAll('#gallery img')];
-  const lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg');
+  const figsEls=[...document.querySelectorAll('#gallery figure img')];
+  const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg');
   let cur=0;
-  function show(i){cur=(i+imgs.length)%imgs.length;lbImg.src=imgs[cur].src;lbImg.alt=imgs[cur].alt;lb.classList.add('open');}
-  imgs.forEach((im,i)=>im.addEventListener('click',()=>show(i)));
-  document.getElementById('lbClose').addEventListener('click',()=>lb.classList.remove('open'));
-  document.getElementById('lbPrev').addEventListener('click',e=>{e.stopPropagation();show(cur-1);});
-  document.getElementById('lbNext').addEventListener('click',e=>{e.stopPropagation();show(cur+1);});
-  lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('open');});
-  document.addEventListener('keydown',e=>{
-    if(!lb.classList.contains('open'))return;
-    if(e.key==='Escape')lb.classList.remove('open');
-    if(e.key==='ArrowLeft')show(cur-1);
-    if(e.key==='ArrowRight')show(cur+1);
-  });
+  function open(i){cur=i;lbImg.src=figsEls[i].src;lbImg.alt=figsEls[i].alt;lb.classList.add('open');document.body.style.overflow='hidden';}
+  function close(){lb.classList.remove('open');document.body.style.overflow='';}
+  function nav(d){cur=(cur+d+figsEls.length)%figsEls.length;lbImg.src=figsEls[cur].src;lbImg.alt=figsEls[cur].alt;}
+  figsEls.forEach((im,i)=>im.addEventListener('click',()=>open(i)));
+  document.getElementById('lbClose').addEventListener('click',close);
+  document.getElementById('lbPrev').addEventListener('click',e=>{e.stopPropagation();nav(-1);});
+  document.getElementById('lbNext').addEventListener('click',e=>{e.stopPropagation();nav(1);});
+  lb.addEventListener('click',e=>{if(e.target===lb)close();});
+  document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')nav(-1);if(e.key==='ArrowRight')nav(1);});
 </script>
 </body>
 </html>

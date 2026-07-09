@@ -7,7 +7,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,900&family=Montserrat:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#fefefe;--bg2:#f7f5f1;--ink:#2a2419;--muted:#807a6b;--line:#e4ded1;
@@ -18,7 +18,7 @@
     --blue:#2b6cc4;--blue-text:#2563b0;
     --olive:#7f7e45;--olive-text:#5f5e33;
     --slate:#4a5a68;
-    --serif:"Fraunces",Georgia,serif;--sans:"Montserrat",sans-serif;--mono:"Space Mono",monospace;
+    --body:"Outfit",sans-serif;--serif:"Outfit",sans-serif;--sans:"Outfit",sans-serif;--mono:"Outfit",sans-serif;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -109,7 +109,7 @@
 
   /* smaller grid */
   .more-head{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--muted);margin:54px 0 18px;padding-top:30px;border-top:1px solid var(--line)}
-  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
 
   /* about + footer */
   .about{margin-top:90px;padding-top:48px;border-top:1px solid var(--line);max-width:680px}
@@ -162,14 +162,15 @@
 
     <nav>
       <div class="navgroup">CASE STUDIES</div>
-      <a class="navlink" data-tile="cece" data-accent="peri" href="cece.html"><span class="idx">01</span> Cece</a>
+      <a class="navlink" data-tile="pretium" data-accent="green" href="pretium.html"><span class="idx">01</span> Pretium</a>
       <a class="navlink" data-tile="nomad" data-accent="red" href="nomad.html"><span class="idx">02</span> Nomad</a>
 
       <div class="navgroup">MORE WORK</div>
-      <a class="navlink" data-tile="lakeshore" data-accent="blue" href="lakeshore.html"><span class="idx">03</span> Lakeshore Collective</a>
-      <a class="navlink" data-tile="littlewren" data-accent="olive" href="littlewren.html"><span class="idx">04</span> Little Wren Cafe</a>
-      <a class="navlink" data-tile="koehler" data-accent="slate" href="koehler.html"><span class="idx">05</span> Koehler Industries</a>
-      <a class="navlink" data-tile="art" data-accent="pink" href="art.html"><span class="idx">06</span> Fine Art</a>
+      <a class="navlink" data-tile="cece" data-accent="peri" href="cece.html"><span class="idx">03</span> Cece</a>
+      <a class="navlink" data-tile="lakeshore" data-accent="blue" href="lakeshore.html"><span class="idx">04</span> Lakeshore Collective</a>
+      <a class="navlink" data-tile="littlewren" data-accent="olive" href="littlewren.html"><span class="idx">05</span> Little Wren Cafe</a>
+      <a class="navlink" data-tile="koehler" data-accent="slate" href="koehler.html"><span class="idx">06</span> Koehler Industries</a>
+      <a class="navlink" data-tile="art" data-accent="pink" href="art.html"><span class="idx">07</span> Fine Art</a>
 
       <div class="navgroup">INFO</div>
       <a class="navlink" data-accent="pink" href="about.html"><span class="idx">→</span> About</a>
@@ -190,19 +191,19 @@
 
     <!-- big three -->
     <section class="heroes">
-      <a class="tile big reveal" id="tile-cece" data-accent="peri" href="cece.html">
+      <a class="tile big reveal" id="tile-pretium" data-accent="green" href="pretium.html">
         <span class="bar"></span>
-        <img class="ph" src="images/tile-cece.webp" alt="Cece the Counting Caterpillar toy">
+        <img class="ph" src="images/home-pretium.webp" alt="Pretium brand identity">
         <div class="meta">
-          <div class="k">Product / UX</div>
-          <div class="t">Cece</div>
-          <div class="d">An educational infant toy, from research to a tested final product.</div>
+          <div class="k">Brand / Identity</div>
+          <div class="t">Pretium</div>
+          <div class="d">A full brand identity for a packaging manufacturer, built on research.</div>
           <span class="go">View case study →</span>
         </div>
       </a>
       <a class="tile big reveal" id="tile-nomad" data-accent="red" href="nomad.html">
         <span class="bar"></span>
-        <img class="ph" src="images/tile-nomad.webp" alt="Nomad app screens">
+        <img class="ph" src="images/home-nomad.webp" alt="Nomad app screens">
         <div class="meta">
           <div class="k">Strategy / Product</div>
           <div class="t">Nomad</div>
@@ -215,9 +216,19 @@
     <!-- more work -->
     <div class="more-head">MORE WORK</div>
     <section class="grid">
-      <a class="tile small reveal" id="tile-lakeshore" data-accent="blue" href="lakeshore.html">
+      <a class="tile small reveal" id="tile-cece" data-accent="peri" href="cece.html">
         <span class="bar"></span>
-        <img class="ph" src="images/tile-lakeshore.webp" alt="The Lakeshore Collective community space rendering">
+        <img class="ph" src="images/home-cece.webp" alt="Cece the Counting Caterpillar toy">
+        <div class="meta">
+          <div class="k">Product / UX</div>
+          <div class="t">Cece</div>
+          <div class="d">An educational infant toy, from research to a tested final product.</div>
+          <span class="go">View case study →</span>
+        </div>
+      </a>
+            <a class="tile small reveal" id="tile-lakeshore" data-accent="blue" href="lakeshore.html">
+        <span class="bar"></span>
+        <img class="ph" src="images/home-lakeshore.webp" alt="The Lakeshore Collective community space rendering">
         <div class="meta">
           <div class="k">Environmental</div>
           <div class="t">The Lakeshore Collective</div>
@@ -227,7 +238,7 @@
       </a>
       <a class="tile small reveal" id="tile-littlewren" data-accent="olive" href="littlewren.html">
         <span class="bar"></span>
-        <img class="ph" src="images/tile-littlewren.webp" alt="Little Wren Cafe logo on a storefront window">
+        <img class="ph" src="images/home-littlewren.webp" alt="Little Wren Cafe logo on a storefront window">
         <div class="meta">
           <div class="k">Brand Identity</div>
           <div class="t">Little Wren Cafe</div>
@@ -237,7 +248,7 @@
       </a>
       <a class="tile small reveal" id="tile-koehler" data-accent="slate" href="koehler.html">
         <span class="bar"></span>
-        <img class="ph" src="images/tile-koehler.webp" alt="Koehler Industries logo on a building">
+        <img class="ph" src="images/home-koehler.webp" alt="Koehler Industries logo on a building">
         <div class="meta">
           <div class="k">Brand Identity</div>
           <div class="t">Koehler Industries</div>
@@ -247,7 +258,7 @@
       </a>
       <a class="tile small reveal" id="tile-art" data-accent="pink" href="art.html">
         <span class="bar"></span>
-        <img class="ph" src="images/tile-art.webp" alt="Fine art gallery">
+        <img class="ph" src="images/home-art.webp" alt="Fine art gallery">
         <div class="meta">
           <div class="k">Fine Art</div>
           <div class="t">Studio Work</div>
