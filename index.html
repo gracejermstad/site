@@ -108,8 +108,8 @@
     .shell{grid-template-columns:1fr}
     .rail{position:static;height:auto;overflow-y:visible}
     .work{padding:36px 16px 50px}
-    .puzzle-grid{grid-template-columns:repeat(10,minmax(26px,32px));grid-auto-rows:minmax(26px,32px)}
-    .puzzle-grid .cell{font-size:.78rem}
+    .puzzle-grid{grid-template-columns:repeat(12,minmax(20px,24px));grid-auto-rows:minmax(20px,24px)}
+    .puzzle-grid .cell{font-size:.62rem}
   }
 </style>
 </head>
@@ -336,7 +336,7 @@
   const doodleLayer=document.getElementById('doodleLayer');
 
   function slotX(idx){
-    const minX=Math.max(440, window.innerWidth*0.4);
+    const minX = window.innerWidth < 900 ? 24 : Math.max(440, window.innerWidth*0.4);
     const maxX=window.innerWidth-50;
     const slot=(maxX-minX)/nameChars.length;
     return minX + slot*idx + slot*0.22;
@@ -373,15 +373,22 @@
     nameEls.push(el);
   }
 
+  // only trigger the doodle/name-reveal on a gesture that isn't actually needed to scroll —
+  // on mobile the stacked layout genuinely scrolls, so let real scrolling happen undisturbed
+  function pageActuallyScrolls(){
+    return document.documentElement.scrollHeight > window.innerHeight + 2;
+  }
+
   window.addEventListener('wheel', e=>{
+    if(pageActuallyScrolls())return;
     if(e.deltaY > 4){ popDoodle(); }
   }, {passive:true});
 
-  // mobile: a downward touch-drag on a page that doesn't scroll
+  // desktop only: a downward touch-drag on a page that doesn't scroll
   let touchStartY=null;
   window.addEventListener('touchstart', e=>{ touchStartY=e.touches[0].clientY; }, {passive:true});
   window.addEventListener('touchmove', e=>{
-    if(touchStartY===null)return;
+    if(touchStartY===null || pageActuallyScrolls())return;
     const dy=e.touches[0].clientY - touchStartY;
     if(dy < -18){ popDoodle(); touchStartY=e.touches[0].clientY; }
   }, {passive:true});
