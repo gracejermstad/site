@@ -7,145 +7,110 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@300&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#fefefe;--bg2:#f7f5f1;--ink:#2a2419;--muted:#807a6b;--line:#e4ded1;
-    --pink:#e85d8a;--pink-text:#c0345f;
-    --peri:#8b8ce8;--peri-text:#5556c4;
-    --green:#24625c;--green-text:#1f5e58;
-    --red:#e53d68;--red-text:#b8203f;
-    --blue:#2b6cc4;--blue-text:#2563b0;
-    --olive:#7f7e45;--olive-text:#5f5e33;
-    --slate:#4a5a68;
-    --body:"Outfit",sans-serif;--serif:"Outfit",sans-serif;--sans:"Outfit",sans-serif;--mono:"Outfit",sans-serif;
+    --pink:#E6007A;--pink-text:#B4005F;
+    --c-pretium:#24625c;--c-nomad:#e53d68;--c-cece:#8b8ce8;--c-art:#4164ff;--c-littlewren:#7f7e45;
+    --active-color:var(--pink);
+    --sans:"Work Sans",sans-serif;--headline:"Bitter",serif;--mono:"Space Mono",monospace;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.6}
+  body{background:var(--bg);
+    background-image:linear-gradient(rgba(254,254,254,.82),rgba(254,254,254,.82)), url('images/paper-texture.webp');
+    background-repeat:no-repeat,no-repeat;background-size:cover,cover;background-attachment:fixed,fixed;background-position:center,center;
+    color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.6}
   ::selection{background:var(--pink);color:#fff}
-  :focus-visible{outline:3px solid var(--pink-text);outline-offset:3px;border-radius:3px}
+  :focus-visible{outline:3px solid var(--pink-text);outline-offset:3px;border-radius:0}
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
 
-  /* ===== LAYOUT: sticky rail + scrolling work ===== */
-  .shell{display:grid;grid-template-columns:340px 1fr;min-height:100vh}
+  .shell{display:grid;grid-template-columns:480px 1fr;min-height:100vh}
 
   /* ----- LEFT RAIL ----- */
-  .rail{position:sticky;top:0;height:100vh;padding:48px 38px;display:flex;flex-direction:column;border-right:1px solid var(--line);background:var(--bg)}
-  .rail .top{flex:0 0 auto}
-  .rail .name{font-family:var(--serif);font-size:2rem;font-weight:600;letter-spacing:-.02em;line-height:1.04}
-  .rail .name .dot{color:var(--pink)}
-  .rail .role{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--pink-text);margin-top:14px;text-transform:uppercase}
-  .rail .bio{font-size:.92rem;font-weight:300;color:var(--ink);margin-top:22px;max-width:250px;line-height:1.65}
+  .rail{position:sticky;top:0;height:100vh;padding:40px 34px;display:flex;flex-direction:column;overflow-y:auto;
+    background:rgba(254,254,254,.55);border-right:1px solid var(--line)}
+  .rail .name{font-family:var(--headline);font-size:1.7rem;font-weight:300;letter-spacing:-.01em;white-space:nowrap;display:block;margin:0 -16px 0 0}
+  .rail .role{font-family:var(--mono);font-size:10px;letter-spacing:1.2px;color:var(--pink-text);margin-top:12px;text-transform:uppercase;line-height:1.5}
+  .rail .bio{font-size:.82rem;font-weight:300;color:var(--ink);margin-top:14px;line-height:1.55}
 
-  .rail nav{margin-top:40px;display:flex;flex-direction:column;gap:2px}
-  .rail .navgroup{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted);margin:18px 0 10px}
-  .rail .navgroup:first-child{margin-top:0}
-  .rail .navlink{display:flex;align-items:baseline;gap:10px;padding:7px 0;font-family:var(--serif);font-size:1.18rem;font-weight:400;color:var(--ink);transition:color .25s,transform .25s;cursor:pointer}
-  .rail .navlink .idx{font-family:var(--mono);font-size:10px;color:var(--muted);transition:color .25s}
-  .rail .navlink:hover{transform:translateX(6px)}
-  .rail .navlink[data-accent="peri"]:hover, .rail .navlink[data-accent="peri"]:hover .idx{color:var(--peri-text)}
-  .rail .navlink[data-accent="green"]:hover, .rail .navlink[data-accent="green"]:hover .idx{color:var(--green-text)}
-  .rail .navlink[data-accent="red"]:hover, .rail .navlink[data-accent="red"]:hover .idx{color:var(--red-text)}
-  .rail .navlink[data-accent="blue"]:hover, .rail .navlink[data-accent="blue"]:hover .idx{color:var(--blue-text)}
-  .rail .navlink[data-accent="olive"]:hover, .rail .navlink[data-accent="olive"]:hover .idx{color:var(--olive-text)}
-  .rail .navlink[data-accent="slate"]:hover, .rail .navlink[data-accent="slate"]:hover .idx{color:var(--slate)}
-  .rail .navlink[data-accent="pink"]:hover, .rail .navlink[data-accent="pink"]:hover .idx{color:var(--pink-text)}
+  .rail .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;color:var(--muted);text-transform:uppercase;margin:20px 0 7px}
+  .rail .eyebrow:first-of-type{margin-top:22px}
 
-  .rail .foot{margin-top:auto;padding-top:24px;font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:7px}
-  .rail .foot a{transition:color .25s}
+  .rail .clue{display:block;padding:7px 10px;margin:0 -10px;border-radius:0;cursor:pointer;border-left:3px solid transparent;transition:background .2s,border-color .2s,transform .2s}
+  .rail .clue:hover, .rail .clue:focus-visible, .rail .clue.active{background:rgba(0,0,0,.04);border-left-color:var(--active-color);transform:translateX(3px)}
+  .rail .clue .cn{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--pink-text);margin-right:8px}
+  .rail .clue .cd{font-size:.82rem;font-weight:300;color:var(--ink);line-height:1.45}
+
+  .rail .about-block{display:block;margin-top:20px;padding:14px 16px;border:1px solid var(--line);border-radius:0;
+    background:rgba(254,254,254,.5);transition:border-color .2s,background .2s,transform .2s}
+  .rail .about-block:hover{border-color:var(--pink-text);background:rgba(254,254,254,.85);transform:translateX(2px)}
+  .rail .about-block .at{font-family:var(--headline);font-size:1.2rem;font-weight:300}
+  .rail .about-block .as{font-size:.76rem;color:var(--muted);margin-top:4px;line-height:1.45}
+  .rail .about-block .aa{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;color:var(--pink-text);margin-top:8px}
+
+  .rail .foot{margin-top:auto;padding-top:16px;font-family:var(--mono);font-size:10.5px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
   .rail .foot a:hover{color:var(--pink-text)}
 
-  /* ----- RIGHT: WORK ----- */
-  .work{padding:48px 48px 0}
-  .work .intro{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:10px}
-  .work .intro h1{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,2rem);font-weight:400;letter-spacing:-.01em}
-  .work .intro .scrollcue{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted)}
+  /* ----- MAIN: the puzzle, with a photo reveal behind it on hover ----- */
+  .work{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:60px 30px;min-height:100vh;overflow:hidden}
+  .work .lede{position:relative;z-index:2;font-size:.85rem;color:var(--muted);text-align:center;max-width:280px;margin-bottom:26px}
 
-  /* big three */
-  .heroes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-  .tile{position:relative;border-radius:14px;overflow:hidden;background:var(--bg2);cursor:pointer;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s,flex .5s;border:1px solid var(--line)}
-  .tile .ph{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
-  .tile.big{aspect-ratio:1/1}
-  .tile.small{aspect-ratio:1/1}
-  .tile .meta{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;background:linear-gradient(to top,var(--fill,rgba(20,18,14,.96)) 30%,color-mix(in srgb,var(--fill,rgba(20,18,14,1)) 78%,transparent) 65%,color-mix(in srgb,var(--fill,rgba(20,18,14,1)) 35%,transparent));opacity:0;transition:opacity .45s}
-  .tile:hover .meta, .tile.active .meta{opacity:1}
-  .tile:hover .ph, .tile.active .ph{transform:scale(1.06)}
-  .tile .meta .k{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:#fff;opacity:.95;text-transform:uppercase}
-  .tile .meta .t{font-family:var(--serif);font-size:1.5rem;font-weight:500;color:#fff;margin-top:7px;line-height:1.05}
-  .tile .meta .d{font-size:.82rem;font-weight:300;color:#fff;opacity:1;margin-top:8px;max-width:90%}
-  .tile .meta .go{font-family:var(--mono);font-size:11px;color:#fff;margin-top:14px;display:inline-flex;align-items:center;gap:6px}
-  /* smaller tiles (four across) — scale text down so it all fits */
-  .tile.small .meta{padding:16px}
-  .tile.small .meta .k{font-size:8.5px;letter-spacing:1px}
-  .tile.small .meta .t{font-size:1.05rem;margin-top:5px;line-height:1.08}
-  .tile.small .meta .d{font-size:.72rem;margin-top:6px;line-height:1.45;max-width:100%}
-  .tile.small .meta .go{font-size:9.5px;margin-top:10px}
-  /* color rail at top of each tile via accent */
-  .tile .bar{position:absolute;top:0;left:0;right:0;height:4px;z-index:2;transform:scaleX(0);transform-origin:left;transition:transform .45s}
-  .tile:hover .bar, .tile.active .bar{transform:scaleX(1)}
-  .tile[data-accent="peri"] .bar{background:var(--peri)} .tile[data-accent="peri"].active{box-shadow:0 18px 50px -18px var(--peri)}
-  .tile[data-accent="green"] .bar{background:var(--green)} .tile[data-accent="green"].active{box-shadow:0 18px 50px -18px var(--green)}
-  .tile[data-accent="red"] .bar{background:var(--red)} .tile[data-accent="red"].active{box-shadow:0 18px 50px -18px var(--red)}
-  .tile[data-accent="blue"] .bar{background:var(--blue)} .tile[data-accent="blue"].active{box-shadow:0 18px 50px -18px var(--blue)}
-  .tile[data-accent="olive"] .bar{background:var(--olive)} .tile[data-accent="olive"].active{box-shadow:0 18px 50px -18px var(--olive)}
-  .tile[data-accent="slate"] .bar{background:var(--slate)} .tile[data-accent="slate"].active{box-shadow:0 18px 50px -18px var(--slate)}
-  .tile[data-accent="pink"] .bar{background:var(--pink)} .tile[data-accent="pink"].active{box-shadow:0 18px 50px -18px var(--pink)}
-  /* hover overlay fill — deep brand color, charcoal for Fine Art */
-  .tile[data-accent="peri"] .meta{--fill:rgba(74,75,184,.93)}
-  .tile[data-accent="green"] .meta{--fill:rgba(20,58,54,.94)}
-  .tile[data-accent="red"] .meta{--fill:rgba(150,24,52,.93)}
-  .tile[data-accent="blue"] .meta{--fill:rgba(20,64,120,.93)}
-  .tile[data-accent="olive"] .meta{--fill:rgba(58,58,28,.94)}
-  .tile[data-accent="slate"] .meta{--fill:rgba(40,52,62,.94)}
-  .tile[data-accent="pink"] .meta{--fill:rgba(34,30,22,.94)}
-  .tile.active{transform:translateY(-8px) scale(1.018)}
+  .photo-layer{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:min(1120px,94vw);height:min(840px,82vh);z-index:0;pointer-events:none;
+    opacity:0;transition:opacity .4s ease}
+  .photo-layer.on{opacity:1}
+  .photo-layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+    opacity:0;transition:opacity .4s ease}
+  .photo-layer img.on{opacity:1}
 
-  /* placeholder-style colored tiles (no photo yet) */
-  .tile .swatch{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2.4rem;font-weight:600;color:#fff;letter-spacing:-.02em}
-  .tile[data-accent="blue"] .swatch{background:var(--blue)}
-  .tile[data-accent="olive"] .swatch{background:var(--olive)}
+  .puzzle-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(12,minmax(30px,44px));grid-auto-rows:minmax(30px,44px);gap:0;
+    transition:opacity .35s ease}
+  .puzzle-grid.dimmed{opacity:.42}
+  .puzzle-grid .cell{position:relative;display:flex;align-items:center;justify-content:center;
+    font-family:var(--sans);font-weight:600;font-size:clamp(.95rem,2.3vw,1.25rem);color:var(--ink);transition:background .2s,color .2s}
+  .puzzle-grid .cell.blk{background:transparent}
+  .puzzle-grid .cell.wht{background:#fff;border:1px solid var(--line);cursor:pointer;margin:-1px 0 0 -1px}
+  .puzzle-grid .cell.wht .letter{display:inline-block;opacity:0;transform:translateY(5px) scale(.7);
+    animation:letterFillIn .4s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--fill-delay,0s)}
+  @keyframes letterFillIn{
+    0%{opacity:0;transform:translateY(5px) scale(.7)}
+    60%{opacity:1;transform:translateY(-2px) scale(1.12)}
+    100%{opacity:1;transform:translateY(0) scale(1)}
+  }
+  @media(prefers-reduced-motion:reduce){.puzzle-grid .cell.wht .letter{animation:none;opacity:1;transform:none}}
+  .puzzle-grid .cell.wht.active{background:var(--active-color);color:#fff;border-color:var(--active-color);z-index:1}
+  .puzzle-grid .cell .num{position:absolute;top:1px;left:2px;font-family:var(--mono);font-size:7.5px;font-weight:700;color:var(--num-color,var(--muted))}
+  .puzzle-grid .cell.wht.active .num{color:rgba(255,255,255,.85)}
 
-  /* smaller grid */
-  .more-head{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--muted);margin:54px 0 18px;padding-top:30px;border-top:1px solid var(--line)}
-  .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  footer.pfooter{position:relative;z-index:2;margin-top:34px;text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
 
-  /* about + footer */
-  .about{margin-top:90px;padding-top:48px;border-top:1px solid var(--line);max-width:680px}
-  .about .k{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--pink-text);margin-bottom:18px}
-  .about h2{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.3rem);font-weight:500;letter-spacing:-.02em;line-height:1.15;margin-bottom:20px}
-  .about h2 em{font-style:italic;color:var(--pink-text)}
-  .about p{font-size:1rem;font-weight:300;color:var(--ink);margin-bottom:16px}
-  .about .more{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--pink-text);border-bottom:1px solid var(--pink);padding-bottom:3px}
+  /* ----- scroll-doodles: letters of my name rise from the bottom edge and stay, to the right of the rail ----- */
+  #doodleLayer{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+  .name-letter{position:absolute;bottom:26px;font-family:var(--headline);font-weight:300;font-size:clamp(1.2rem,2.4vw,1.8rem);
+    opacity:0;transform:rotate(var(--rot,-6deg));animation:nameLetterIn .55s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes nameLetterIn{
+    0%{opacity:0;transform:translateY(16px) rotate(var(--rot)) scale(.65)}
+    60%{opacity:1;transform:translateY(-6px) rotate(var(--rot)) scale(1.1)}
+    100%{opacity:1;transform:translateY(0) rotate(var(--rot)) scale(1)}
+  }
+  .name-letter.leaving{animation:nameLetterOut .5s ease forwards}
+  @keyframes nameLetterOut{to{opacity:0;transform:translateY(-26px) rotate(0deg) scale(.8)}}
 
-  footer{margin-top:80px;padding:48px 0 56px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
-  footer .ft-name{font-family:var(--serif);font-size:1.5rem;font-weight:500}
-  footer .ft-links{display:flex;gap:20px;font-family:var(--mono);font-size:12px}
-  footer .ft-links a{color:var(--muted);transition:color .25s}
-  footer .ft-links a:hover{color:var(--pink-text)}
-  footer .ft-copy{font-family:var(--mono);font-size:10px;color:var(--muted);width:100%;margin-top:8px}
-
-  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
   .reveal.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 
-  /* ===== MOBILE ===== */
-  .menubtn{display:none}
   @media(max-width:900px){
     .shell{grid-template-columns:1fr}
-    .rail{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:32px 24px}
-    .rail .bio{max-width:none}
-    .rail nav{margin-top:26px}
-    .rail .foot{margin-top:28px}
-    .work{padding:32px 24px 0}
-    .heroes{grid-template-columns:1fr;gap:14px}
-    .tile.big{aspect-ratio:4/3}
-    .grid{grid-template-columns:1fr 1fr}
-    .tile .meta{opacity:1;background:linear-gradient(to top,rgba(20,18,14,.8),transparent 60%)}
-    .tile .bar{transform:scaleX(1)}
+    .rail{position:static;height:auto;overflow-y:visible}
+    .work{padding:36px 16px 50px}
+    .puzzle-grid{grid-template-columns:repeat(10,minmax(26px,32px));grid-auto-rows:minmax(26px,32px)}
+    .puzzle-grid .cell{font-size:.78rem}
   }
-  @media(max-width:520px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -154,154 +119,272 @@
 
   <!-- ===== LEFT RAIL ===== -->
   <aside class="rail">
-    <div class="top">
-      <div class="name">Grace<br>Jermstad<span class="dot">.</span></div>
-      <div class="role">Multidisciplinary Designer</div>
-      <p class="bio">I make things for people, across UX, branding, and product. A systems thinker who's happiest in the messy middle, turning research and a love of craft into work that gets used.</p>
-    </div>
+    <div class="name">Grace Jermstad</div>
+    <div class="role">Product &amp; UX/UI · Branding &amp; Digital Design</div>
+    <p class="bio">I'm Grace — a designer, artist, and chronic puzzle-solver. I live for the messy middle: research and intuition colliding, corkboards and pencil sketches, ideas built, broken, rebuilt (broken a few more times), then refined into something real. Mostly, though, I'm in love with the people behind my work.</p>
 
-    <nav>
-      <div class="navgroup">CASE STUDIES</div>
-      <a class="navlink" data-tile="pretium" data-accent="green" href="pretium.html"><span class="idx">01</span> Pretium</a>
-      <a class="navlink" data-tile="nomad" data-accent="red" href="nomad.html"><span class="idx">02</span> Nomad</a>
+    <div class="eyebrow">Down</div>
+    <a class="clue active" id="clue-pretium" data-p="pretium" href="pretium.html">
+      <span class="cn" style="color:var(--c-pretium)">1</span><span class="cd">One identity, built for the plant floor and the boardroom.</span>
+    </a>
+    <a class="clue" id="clue-nomad" data-p="nomad" href="nomad.html">
+      <span class="cn" style="color:var(--c-nomad)">2</span><span class="cd">Brand and product built around a real venture thesis.</span>
+    </a>
+    <a class="clue" id="clue-cece" data-p="cece" href="cece.html">
+      <span class="cn" style="color:var(--c-cece)">3</span><span class="cd">An educational infant toy, research through real testing.</span>
+    </a>
 
-      <div class="navgroup">MORE WORK</div>
-      <a class="navlink" data-tile="cece" data-accent="peri" href="cece.html"><span class="idx">03</span> Cece</a>
-      <a class="navlink" data-tile="lakeshore" data-accent="blue" href="lakeshore.html"><span class="idx">04</span> Lakeshore Collective</a>
-      <a class="navlink" data-tile="littlewren" data-accent="olive" href="littlewren.html"><span class="idx">05</span> Little Wren Cafe</a>
-      <a class="navlink" data-tile="koehler" data-accent="slate" href="koehler.html"><span class="idx">06</span> Koehler Industries</a>
-      <a class="navlink" data-tile="art" data-accent="pink" href="art.html"><span class="idx">07</span> Fine Art</a>
+    <div class="eyebrow">Across</div>
+    <a class="clue" id="clue-art" data-p="art" href="art.html">
+      <span class="cn" style="color:var(--c-art)">1</span><span class="cd">Painting, drawing, print & craft — personal work.</span>
+    </a>
+    <a class="clue" id="clue-littlewren" data-p="littlewren" href="littlewren.html">
+      <span class="cn" style="color:var(--c-littlewren)">2</span><span class="cd">A café brand built on contrast and birdwatching.</span>
+    </a>
 
-      <div class="navgroup">INFO</div>
-      <a class="navlink" data-accent="pink" href="about.html"><span class="idx">→</span> About</a>
-    </nav>
+    <a class="about-block" href="about.html">
+      <div class="at">A bit about me</div>
+      <div class="as">Paper, puzzles, and the occasional ceramic bowl.</div>
+      <div class="aa">Get to know me →</div>
+    </a>
 
     <div class="foot">
       <a href="mailto:gracejermstad@gmail.com">gracejermstad@gmail.com</a>
-      <div><a href="https://www.linkedin.com/in/gracejermstad" target="_blank" rel="noopener">LinkedIn</a></div>
+      <a href="https://www.linkedin.com/in/gracejermstad" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </aside>
 
-  <!-- ===== RIGHT: WORK ===== -->
+  <!-- ===== MAIN: the puzzle ===== -->
   <main class="work">
-    <div class="intro">
-      <h1>Selected work</h1>
-      <span class="scrollcue">SCROLL ↓</span>
+    <div class="photo-layer" id="photoLayer" aria-hidden="true">
+      <img id="ph-pretium" src="images/home-pretium.webp" alt="">
+      <img id="ph-nomad" src="images/home-nomad.webp" alt="">
+      <img id="ph-cece" src="images/home-cece.webp" alt="">
+      <img id="ph-art" src="images/home-art.webp" alt="">
+      <img id="ph-littlewren" src="images/home-littlewren.webp" alt="">
     </div>
-
-    <!-- big three -->
-    <section class="heroes">
-      <a class="tile big reveal" id="tile-pretium" data-accent="green" href="pretium.html">
-        <span class="bar"></span>
-        <img class="ph" src="images/home-pretium.webp" alt="Pretium brand identity">
-        <div class="meta">
-          <div class="k">Brand / Identity</div>
-          <div class="t">Pretium</div>
-          <div class="d">A full brand identity for a packaging manufacturer, built on research.</div>
-          <span class="go">View case study →</span>
-        </div>
-      </a>
-      <a class="tile big reveal" id="tile-nomad" data-accent="red" href="nomad.html">
-        <span class="bar"></span>
-        <img class="ph" src="images/home-nomad.webp" alt="Nomad app screens">
-        <div class="meta">
-          <div class="k">Strategy / Product</div>
-          <div class="t">Nomad</div>
-          <div class="d">Brand and product built around a real venture thesis.</div>
-          <span class="go">View case study →</span>
-        </div>
-      </a>
-    </section>
-
-    <!-- more work -->
-    <div class="more-head">MORE WORK</div>
-    <section class="grid">
-      <a class="tile small reveal" id="tile-cece" data-accent="peri" href="cece.html">
-        <span class="bar"></span>
-        <img class="ph" src="images/home-cece.webp" alt="Cece the Counting Caterpillar toy">
-        <div class="meta">
-          <div class="k">Product / UX</div>
-          <div class="t">Cece</div>
-          <div class="d">An educational infant toy, from research to a tested final product.</div>
-          <span class="go">View case study →</span>
-        </div>
-      </a>
-            <a class="tile small reveal" id="tile-lakeshore" data-accent="blue" href="lakeshore.html">
-        <span class="bar"></span>
-        <img class="ph" src="images/home-lakeshore.webp" alt="The Lakeshore Collective community space rendering">
-        <div class="meta">
-          <div class="k">Environmental</div>
-          <div class="t">The Lakeshore Collective</div>
-          <div class="d">Speculative design turning shoreline waste into community.</div>
-          <span class="go">View project →</span>
-        </div>
-      </a>
-      <a class="tile small reveal" id="tile-littlewren" data-accent="olive" href="littlewren.html">
-        <span class="bar"></span>
-        <img class="ph" src="images/home-littlewren.webp" alt="Little Wren Cafe logo on a storefront window">
-        <div class="meta">
-          <div class="k">Brand Identity</div>
-          <div class="t">Little Wren Cafe</div>
-          <div class="d">A whimsical café brand built on contrast and birdwatching.</div>
-          <span class="go">View project →</span>
-        </div>
-      </a>
-      <a class="tile small reveal" id="tile-koehler" data-accent="slate" href="koehler.html">
-        <span class="bar"></span>
-        <img class="ph" src="images/home-koehler.webp" alt="Koehler Industries logo on a building">
-        <div class="meta">
-          <div class="k">Brand Identity</div>
-          <div class="t">Koehler Industries</div>
-          <div class="d">An industrial rebrand for a tool-and-die manufacturer.</div>
-          <span class="go">View project →</span>
-        </div>
-      </a>
-      <a class="tile small reveal" id="tile-art" data-accent="pink" href="art.html">
-        <span class="bar"></span>
-        <img class="ph" src="images/home-art.webp" alt="Fine art gallery">
-        <div class="meta">
-          <div class="k">Fine Art</div>
-          <div class="t">Studio Work</div>
-          <div class="d">Painting, drawing, print & craft — a gallery of personal work.</div>
-          <span class="go">View gallery →</span>
-        </div>
-      </a>
-    </section>
-
-    <!-- about -->
-    <section class="about reveal" id="about">
-      <div class="k">A LITTLE ABOUT ME</div>
-      <h2>I'm a designer who loves <em>making things for people.</em></h2>
-      <p>I work across the whole stack of making — UX/UI, branding, product, and the occasional ceramic bowl. I bring a lot of energy to a team, I'm not afraid of a bad idea, and I care about craft in all its forms.</p>
-      <p>My background spans agency branding, entrepreneurial product work, and a fine-art practice, which is exactly the range I try to bring to every problem.</p>
-      <a class="more" href="about.html">More about me →</a>
-    </section>
-
-    <footer>
-      <div class="ft-name">Grace Jermstad</div>
-      <div class="ft-links">
-        <a href="mailto:gracejermstad@gmail.com">Email</a>
-        <a href="https://www.linkedin.com/in/gracejermstad" target="_blank" rel="noopener">LinkedIn</a>
+    <p class="lede reveal">Every project is a puzzle — that's the fun of it! Click a clue to see how I solved it.</p>
+    <div class="reveal">
+      <div class="puzzle-grid" id="puzzleGrid" role="img" aria-label="Crossword of Pretium, Nomad, Cece, Fine Art, and Little Wren">
+        <!-- row 0 -->
+        <div class="cell blk"></div><div class="cell wht" data-r="0" data-c="1" style="--num-color:var(--c-pretium)"><span class="num">1</span>P</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div>
+        <!-- row 1 -->
+        <div class="cell blk"></div><div class="cell wht" data-r="1" data-c="1">R</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell wht" data-r="1" data-c="8" style="--num-color:var(--c-cece)"><span class="num">3</span>C</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div>
+        <!-- row 2 -->
+        <div class="cell blk"></div><div class="cell wht" data-r="2" data-c="1">E</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell wht" data-r="2" data-c="5" style="--num-color:var(--c-art)"><span class="num">1</span>F</div><div class="cell wht" data-r="2" data-c="6">I</div><div class="cell wht" data-r="2" data-c="7">N</div><div class="cell wht" data-r="2" data-c="8">E</div><div class="cell wht" data-r="2" data-c="9">A</div><div class="cell wht" data-r="2" data-c="10">R</div><div class="cell wht" data-r="2" data-c="11">T</div>
+        <!-- row 3 -->
+        <div class="cell blk"></div><div class="cell wht" data-r="3" data-c="1">T</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell wht" data-r="3" data-c="8">C</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div>
+        <!-- row 4 -->
+        <div class="cell wht" data-r="4" data-c="0" style="--num-color:var(--c-littlewren)"><span class="num">2</span>L</div><div class="cell wht" data-r="4" data-c="1">I</div><div class="cell wht" data-r="4" data-c="2">T</div><div class="cell wht" data-r="4" data-c="3">T</div><div class="cell wht" data-r="4" data-c="4">L</div><div class="cell wht" data-r="4" data-c="5">E</div><div class="cell wht" data-r="4" data-c="6">W</div><div class="cell wht" data-r="4" data-c="7">R</div><div class="cell wht" data-r="4" data-c="8">E</div><div class="cell wht" data-r="4" data-c="9" style="--num-color:var(--c-nomad)"><span class="num">2</span>N</div><div class="cell blk"></div><div class="cell blk"></div>
+        <!-- row 5 -->
+        <div class="cell blk"></div><div class="cell wht" data-r="5" data-c="1">U</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell wht" data-r="5" data-c="9">O</div><div class="cell blk"></div><div class="cell blk"></div>
+        <!-- row 6 -->
+        <div class="cell blk"></div><div class="cell wht" data-r="6" data-c="1">M</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell wht" data-r="6" data-c="9">M</div><div class="cell blk"></div><div class="cell blk"></div>
+        <!-- row 7 -->
+        <div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell wht" data-r="7" data-c="9">A</div><div class="cell blk"></div><div class="cell blk"></div>
+        <!-- row 8 -->
+        <div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell wht" data-r="8" data-c="9">D</div><div class="cell blk"></div><div class="cell blk"></div>
       </div>
-      <div class="ft-copy">© 2026 Grace Jermstad — Designed & built by me.</div>
-    </footer>
+    </div>
+    <footer class="pfooter reveal">© 2026 Grace Jermstad — designed &amp; built by me.</footer>
   </main>
 </div>
 
+<div id="doodleLayer" aria-hidden="true"></div>
+
 <script>
-  // reveal on scroll
   const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in')});},{threshold:.08});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // nav hover -> enlarge/activate matching tile
-  document.querySelectorAll('.rail .navlink[data-tile]').forEach(link=>{
-    const tile=document.getElementById('tile-'+link.dataset.tile);
-    if(!tile)return;
-    link.addEventListener('mouseenter',()=>tile.classList.add('active'));
-    link.addEventListener('mouseleave',()=>tile.classList.remove('active'));
-    link.addEventListener('focus',()=>tile.classList.add('active'));
-    link.addEventListener('blur',()=>tile.classList.remove('active'));
+  // fill in the puzzle letters a moment after load, in reading order
+  (function(){
+    const cells=[...document.querySelectorAll('.puzzle-grid .cell.wht')];
+    cells.forEach((cell,i)=>{
+      let letterText='';
+      cell.childNodes.forEach(node=>{
+        if(node.nodeType===Node.TEXT_NODE && node.textContent.trim()){
+          letterText=node.textContent.trim();
+          node.textContent='';
+        }
+      });
+      if(!letterText)return;
+      const span=document.createElement('span');
+      span.className='letter';
+      span.textContent=letterText;
+      span.style.setProperty('--fill-delay', (450 + i*22)+'ms');
+      cell.appendChild(span);
+    });
+  })();
+
+  // stretch the name to fill the full rail width, measured (not guessed) so it's exact regardless of font metrics
+  function fitNameWidth(){
+    const nameEl=document.querySelector('.rail .name');
+    if(!nameEl)return;
+    nameEl.style.fontSize='1.7rem'; // reset to a known baseline before measuring
+    const available=nameEl.clientWidth;
+    const natural=nameEl.scrollWidth;
+    if(natural<=0)return;
+    const base=parseFloat(getComputedStyle(nameEl).fontSize);
+    const fitted=base*(available/natural)*0.99;
+    nameEl.style.fontSize=fitted+'px';
+  }
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fitNameWidth); }
+  window.addEventListener('load', fitNameWidth);
+  let nameResizeT;
+  window.addEventListener('resize', ()=>{ clearTimeout(nameResizeT); nameResizeT=setTimeout(fitNameWidth,120); });
+
+  // cell coordinates per project, matching the grid above exactly
+  const puzzleCells={
+    pretium:   [[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1]],
+    nomad:     [[4,9],[5,9],[6,9],[7,9],[8,9]],
+    cece:      [[1,8],[2,8],[3,8],[4,8]],
+    art:       [[2,5],[2,6],[2,7],[2,8],[2,9],[2,10],[2,11]],
+    littlewren:[[4,0],[4,1],[4,2],[4,3],[4,4],[4,5],[4,6],[4,7],[4,8],[4,9]]
+  };
+  // each project's own brand color, matching the rest of the site
+  const projectColor={
+    pretium:'var(--c-pretium)', nomad:'var(--c-nomad)', cece:'var(--c-cece)',
+    art:'var(--c-art)', littlewren:'var(--c-littlewren)'
+  };
+  const projectUrl={
+    pretium:'pretium.html', nomad:'nomad.html', cece:'cece.html',
+    art:'art.html', littlewren:'littlewren.html'
+  };
+  const cellEls=[...document.querySelectorAll('.puzzle-grid .cell.wht')];
+  cellEls.forEach(cell=>cell.setAttribute('tabindex','0'));
+  const photoLayer=document.getElementById('photoLayer');
+  const puzzleGridEl=document.getElementById('puzzleGrid');
+
+  function selectPuzzle(p){
+    if(!puzzleCells[p])return;
+    document.documentElement.style.setProperty('--active-color', projectColor[p]);
+    document.querySelectorAll('.rail .clue').forEach(c=>c.classList.toggle('active', c.dataset.p===p));
+    document.querySelectorAll('.photo-layer img').forEach(img=>img.classList.toggle('on', img.id==='ph-'+p));
+    photoLayer.classList.add('on');
+    puzzleGridEl.classList.add('dimmed');
+    const active=puzzleCells[p];
+    cellEls.forEach(cell=>{
+      const r=+cell.dataset.r, c=+cell.dataset.c;
+      cell.classList.toggle('active', active.some(([ar,ac])=>ar===r&&ac===c));
+    });
+  }
+
+  // idle state: nothing highlighted, no photo showing
+  function resetPuzzle(){
+    document.querySelectorAll('.rail .clue').forEach(c=>c.classList.remove('active'));
+    document.querySelectorAll('.photo-layer img').forEach(img=>img.classList.remove('on'));
+    photoLayer.classList.remove('on');
+    puzzleGridEl.classList.remove('dimmed');
+    cellEls.forEach(cell=>cell.classList.remove('active'));
+  }
+
+  function cellsOf(r,c){
+    return Object.keys(puzzleCells).filter(p=>puzzleCells[p].some(([ar,ac])=>ar===r&&ac===c));
+  }
+
+  // hovering a letter in the puzzle highlights that project + reveals its photo
+  cellEls.forEach(cell=>{
+    cell.addEventListener('mouseenter', ()=>{
+      const r=+cell.dataset.r, c=+cell.dataset.c;
+      const projects=cellsOf(r,c);
+      if(projects.length) selectPuzzle(projects[0]);
+    });
+    cell.addEventListener('mouseleave', resetPuzzle);
+    cell.addEventListener('focus', ()=>{
+      const r=+cell.dataset.r, c=+cell.dataset.c;
+      const projects=cellsOf(r,c);
+      if(projects.length) selectPuzzle(projects[0]);
+    });
+    cell.addEventListener('blur', resetPuzzle);
+    cell.addEventListener('click', ()=>{
+      const r=+cell.dataset.r, c=+cell.dataset.c;
+      const projects=cellsOf(r,c);
+      if(projects.length) window.location.href = projectUrl[projects[0]];
+    });
+    cell.addEventListener('keydown', e=>{
+      if(e.key==='Enter' || e.key===' '){
+        e.preventDefault();
+        const r=+cell.dataset.r, c=+cell.dataset.c;
+        const projects=cellsOf(r,c);
+        if(projects.length) window.location.href = projectUrl[projects[0]];
+      }
+    });
   });
+
+  document.querySelectorAll('.rail .clue').forEach(clue=>{
+    clue.addEventListener('mouseenter',()=>selectPuzzle(clue.dataset.p));
+    clue.addEventListener('mouseleave', resetPuzzle);
+    clue.addEventListener('focus',()=>selectPuzzle(clue.dataset.p));
+    clue.addEventListener('blur', resetPuzzle);
+  });
+
+  // ===== scroll-doodles: the page doesn't scroll, so scrolling spells my name out — in a shuffled order, but each letter lands in its correct spot =====
+  const fullName='GRACE JERMSTAD';
+  const nameChars=fullName.split('');
+  const letterColors=['var(--c-pretium)','var(--c-nomad)','var(--c-cece)','var(--c-art)','var(--c-littlewren)'];
+
+  function shuffled(arr){
+    const a=[...arr];
+    for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+    return a;
+  }
+
+  const revealIndices=nameChars.map((c,i)=>i).filter(i=>nameChars[i]!==' ');
+  let revealQueue=shuffled(revealIndices);
+  let revealPos=0, nameBusy=false, lastDoodle=0;
+  let nameEls=[];
+  const doodleLayer=document.getElementById('doodleLayer');
+
+  function slotX(idx){
+    const minX=Math.max(440, window.innerWidth*0.4);
+    const maxX=window.innerWidth-50;
+    const slot=(maxX-minX)/nameChars.length;
+    return minX + slot*idx + slot*0.22;
+  }
+
+  function popDoodle(){
+    const now=Date.now();
+    if(nameBusy || now-lastDoodle < 480) return;
+    lastDoodle=now;
+
+    if(revealPos >= revealQueue.length){
+      // name's complete — hold it a moment, then clear and reshuffle for next time
+      nameBusy=true;
+      setTimeout(()=>{
+        nameEls.forEach(el=>el.classList.add('leaving'));
+        setTimeout(()=>{
+          nameEls.forEach(el=>el.remove());
+          nameEls=[]; revealPos=0; revealQueue=shuffled(revealIndices); nameBusy=false;
+        }, 500);
+      }, 1000);
+      return;
+    }
+
+    const idx=revealQueue[revealPos];
+    revealPos++;
+
+    const el=document.createElement('div');
+    el.className='name-letter';
+    el.textContent=nameChars[idx];
+    el.style.left=slotX(idx)+'px';
+    el.style.color=letterColors[idx % letterColors.length];
+    el.style.setProperty('--rot', (Math.random()*18-9).toFixed(1)+'deg');
+    doodleLayer.appendChild(el);
+    nameEls.push(el);
+  }
+
+  window.addEventListener('wheel', e=>{
+    if(e.deltaY > 4){ popDoodle(); }
+  }, {passive:true});
+
+  // mobile: a downward touch-drag on a page that doesn't scroll
+  let touchStartY=null;
+  window.addEventListener('touchstart', e=>{ touchStartY=e.touches[0].clientY; }, {passive:true});
+  window.addEventListener('touchmove', e=>{
+    if(touchStartY===null)return;
+    const dy=e.touches[0].clientY - touchStartY;
+    if(dy < -18){ popDoodle(); touchStartY=e.touches[0].clientY; }
+  }, {passive:true});
 </script>
 </body>
 </html>

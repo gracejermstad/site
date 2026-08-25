@@ -7,20 +7,26 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@300&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#fefefe;--bg2:#f7f5f1;--ink:#2a2419;--muted:#807a6b;--line:#e4ded1;
-    --pink:#e85d8a;--pink-text:#c0345f;
+    --pink:#E6007A;--pink-text:#B4005F;
     /* Pretium green accent */
     --accent:#24625c;--accent-text:#1f5e58;--accent-soft:#e4efed;--accent-deep:#1a3a36;
-    --body:"Outfit",sans-serif;
+    /* every project's brand color, for the mini puzzle */
+    --c-pretium:#24625c;--c-nomad:#e53d68;--c-cece:#8b8ce8;--c-art:#4164ff;--c-littlewren:#7f7e45;
+    --sans:"Work Sans",sans-serif;--headline:"Bitter",serif;--mono:"Space Mono",monospace;
+    --body:var(--sans);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{background:var(--bg);
+    background-image:linear-gradient(rgba(254,254,254,.82),rgba(254,254,254,.82)), url('images/paper-texture.webp');
+    background-repeat:no-repeat,no-repeat;background-size:cover,cover;background-attachment:fixed,fixed;background-position:center,center;
+    color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
   ::selection{background:var(--accent);color:#fff}
-  :focus-visible{outline:3px solid var(--accent-text);outline-offset:3px;border-radius:3px}
+  :focus-visible{outline:3px solid var(--accent-text);outline-offset:3px;border-radius:0}
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
 
@@ -28,19 +34,39 @@
   .shell{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
 
   /* ----- LEFT RAIL (shared across site) ----- */
-  .rail{position:sticky;top:0;height:100vh;padding:40px 32px;display:flex;flex-direction:column;border-right:1px solid var(--line);background:var(--bg);overflow-y:auto}
-  .rail .name{font-family:var(--body);font-size:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1.02}
+  .rail{position:sticky;top:0;height:100vh;padding:40px 32px;display:flex;flex-direction:column;border-right:1px solid var(--line);background:rgba(254,254,254,.6);overflow-y:auto}
+  .rail .name{font-family:var(--headline);font-size:1.5rem;font-weight:300;letter-spacing:-.01em;line-height:1.1}
   .rail .name .dot{color:var(--pink)}
-  .rail .role{font-size:10px;font-weight:500;letter-spacing:2.5px;color:var(--pink-text);margin-top:12px;text-transform:uppercase}
+  .rail .role{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:1.5px;color:var(--pink-text);margin-top:12px;text-transform:uppercase}
   .rail nav{margin-top:36px;display:flex;flex-direction:column;gap:1px}
-  .rail .navgroup{font-size:10px;font-weight:500;letter-spacing:2px;color:var(--muted);margin:16px 0 9px;text-transform:uppercase}
+  .rail .navgroup{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:2px;color:var(--muted);margin:16px 0 9px;text-transform:uppercase}
   .rail .navgroup:first-child{margin-top:0}
   .rail .navlink{display:flex;align-items:baseline;gap:9px;padding:6px 0;font-size:1rem;font-weight:400;color:var(--ink);transition:color .2s,transform .2s}
-  .rail .navlink .idx{font-size:10px;font-weight:500;letter-spacing:1px;color:var(--muted);transition:color .2s;min-width:16px}
+  .rail .navlink .idx{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:1px;color:var(--muted);transition:color .2s;min-width:16px}
   .rail .navlink:hover{transform:translateX(5px);color:var(--accent-text)}
   .rail .navlink:hover .idx{color:var(--accent-text)}
   .rail .navlink.current{color:var(--accent-text);font-weight:600}
   .rail .navlink.current .idx{color:var(--accent-text)}
+
+  .rail .about-block{display:block;margin-top:20px;padding:14px 16px;border:1px solid var(--line);border-radius:0;
+    background:rgba(254,254,254,.5);transition:border-color .2s,background .2s,transform .2s}
+  .rail .about-block:hover{border-color:var(--pink-text);background:rgba(254,254,254,.85);transform:translateX(2px)}
+  .rail .about-block .at{font-family:var(--headline);font-size:1.2rem;font-weight:300}
+  .rail .about-block .as{font-size:.76rem;color:var(--muted);margin-top:4px;line-height:1.45}
+  .rail .about-block .aa{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;color:var(--pink-text);margin-top:8px}
+
+  /* ----- mini puzzle: a small clickable crossword that doubles as site nav ----- */
+  .mini-puzzle{display:grid;grid-template-columns:repeat(12,minmax(13px,17px));grid-auto-rows:minmax(13px,17px);gap:0;margin-top:26px}
+  .mini-puzzle .cell{position:relative;font-family:var(--sans);font-weight:600;font-size:8px;
+    display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background .2s,color .2s}
+  .mini-puzzle .cell.blk{background:transparent}
+  .mini-puzzle .cell.mwht{background:#fff;border:1px solid var(--line);cursor:pointer;margin:-1px 0 0 -1px}
+  .mini-puzzle .cell.mwht:hover, .mini-puzzle .cell.mwht.mactive{background:var(--mp-color,var(--pink));color:#fff;border-color:var(--mp-color,var(--pink));z-index:1}
+  .mini-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin:16px 0 5px}
+  .mini-eyebrow:first-of-type{margin-top:16px}
+  .mini-clue{display:flex;align-items:baseline;gap:7px;padding:3px 0;font-size:.85rem;color:var(--ink);transition:color .2s,transform .2s}
+  .mini-clue:hover{transform:translateX(3px);color:var(--accent-text)}
+  .mini-clue .mn{font-family:var(--mono);font-size:10px;font-weight:700}
   .rail .foot{margin-top:auto;padding-top:24px;font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:7px}
   .rail .foot a{transition:color .2s}
   .rail .foot a:hover{color:var(--accent-text)}
@@ -51,20 +77,20 @@
 
   /* hero */
   .hero{padding:64px 0 0}
-  .hero .eyebrow{font-size:11px;font-weight:500;letter-spacing:2.5px;color:var(--accent-text);text-transform:uppercase;margin-bottom:22px}
-  .hero h1{font-size:clamp(3.2rem,7vw,6rem);font-weight:700;letter-spacing:-.03em;line-height:.98}
+  .hero .eyebrow{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:1.5px;color:var(--accent-text);text-transform:uppercase;margin-bottom:22px}
+  .hero h1{font-family:var(--headline);font-size:clamp(3.2rem,7vw,6rem);font-weight:300;letter-spacing:-.01em;line-height:1.0}
   .hero .sub{font-size:clamp(1.15rem,2vw,1.5rem);font-weight:300;color:var(--ink);max-width:760px;margin-top:24px;line-height:1.4}
   .hero .credit{font-size:.92rem;font-weight:300;color:var(--muted);max-width:720px;margin-top:26px;line-height:1.6}
   .hero .credit b{color:var(--ink);font-weight:500}
 
   /* facts row */
   .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin:48px 0 8px;padding:28px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .facts .f .k{font-size:10px;font-weight:500;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+  .facts .f .k{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
   .facts .f .v{font-size:.98rem;font-weight:400;color:var(--ink);line-height:1.4}
 
   /* immersive images — all align to the same container edges */
   .figure{margin:0}
-  .figure img{width:100%;border-radius:16px;background:var(--bg2)}
+  .figure img{width:100%;border-radius:0;background:var(--bg2)}
   .figure figcaption, .cap{font-size:12px;font-weight:400;color:var(--muted);margin-top:14px;letter-spacing:.2px}
   .cap{margin-bottom:0}
   .band{margin:56px 0}
@@ -75,8 +101,8 @@
 
   /* text sections — headline on left, body on right (desktop) */
   .section{padding:60px 0}
-  .section .marker{font-size:11px;font-weight:600;letter-spacing:2px;color:var(--accent-text);text-transform:uppercase;margin-bottom:18px}
-  .section h2{font-size:clamp(1.9rem,3.6vw,2.9rem);font-weight:600;letter-spacing:-.02em;line-height:1.08;margin-bottom:28px}
+  .section .marker{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:2px;color:var(--accent-text);text-transform:uppercase;margin-bottom:18px}
+  .section h2{font-family:var(--headline);font-size:clamp(1.9rem,3.6vw,2.9rem);font-weight:300;letter-spacing:0;line-height:1.18;margin-bottom:28px}
   .prose{max-width:900px}
   .prose p{font-size:1.12rem;font-weight:300;color:var(--ink);margin-bottom:18px;line-height:1.65}
   /* split: headline column left, prose column right — starts/ends at container edges */
@@ -89,12 +115,12 @@
 
   /* quote */
   .quote{margin:20px 0 8px;padding:44px 0}
-  .quote .q{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:600;letter-spacing:-.02em;color:var(--accent-text);line-height:1.05}
-  .quote .qattr{font-size:10px;font-weight:500;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:22px}
+  .quote .q{font-family:var(--headline);font-size:clamp(2.2rem,5vw,3.4rem);font-weight:300;letter-spacing:0;color:var(--accent-text);line-height:1.15}
+  .quote .qattr{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-top:22px}
 
   /* stats */
   .stats{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:44px auto;max-width:760px}
-  .stat{background:var(--accent-soft);border-radius:18px;padding:38px 34px}
+  .stat{background:var(--accent-soft);border-radius:0;padding:38px 34px}
   .stat .num{font-size:clamp(2.6rem,5vw,3.6rem);font-weight:700;color:var(--accent-text);letter-spacing:-.02em;line-height:1}
   .stat .desc{font-size:.98rem;font-weight:300;color:var(--ink);margin-top:12px;line-height:1.4}
   @media(max-width:600px){.stats{grid-template-columns:1fr}}
@@ -108,7 +134,7 @@
   .next-row .back:hover{color:var(--accent-text)}
   .next-row .next{text-align:right}
   .next-row .next .lbl{font-size:11px;font-weight:500;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
-  .next-row .next .t{font-size:1.9rem;font-weight:700;letter-spacing:-.02em;color:var(--ink);transition:color .2s}
+  .next-row .next .t{font-family:var(--headline);font-size:1.9rem;font-weight:300;letter-spacing:0;color:var(--ink);transition:color .2s}
   .next-row .next:hover .t{color:var(--accent-text)}
 
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
@@ -133,22 +159,32 @@
   <!-- ===== LEFT RAIL ===== -->
   <aside class="rail">
     <div class="top">
-      <a href="index.html"><div class="name">Grace<br>Jermstad<span class="dot">.</span></div></a>
-      <div class="role">Multidisciplinary Designer</div>
+      <a href="index.html"><div class="name">Grace Jermstad</div></a>
+      <div class="role">Branding &amp; Digital Design · Product &amp; UX/UI</div>
     </div>
-    <nav>
-      <div class="navgroup">Case Studies</div>
-      <a class="navlink" href="pretium.html" data-page="pretium"><span class="idx">01</span> Pretium</a>
-      <a class="navlink" href="nomad.html" data-page="nomad"><span class="idx">02</span> Nomad</a>
-      <div class="navgroup">More Work</div>
-      <a class="navlink" href="cece.html" data-page="cece"><span class="idx">03</span> Cece</a>
-      <a class="navlink" href="lakeshore.html" data-page="lakeshore"><span class="idx">04</span> Lakeshore Collective</a>
-      <a class="navlink" href="littlewren.html" data-page="littlewren"><span class="idx">05</span> Little Wren Cafe</a>
-      <a class="navlink" href="koehler.html" data-page="koehler"><span class="idx">06</span> Koehler Industries</a>
-      <a class="navlink" href="art.html" data-page="art"><span class="idx">07</span> Fine Art</a>
-      <div class="navgroup">Info</div>
-      <a class="navlink" href="about.html" data-page="about"><span class="idx">→</span> About</a>
-    </nav>
+    <div class="mini-puzzle" id="miniPuzzle" role="img" aria-label="Crossword of Pretium, Nomad, Cece, Fine Art, and Little Wren">
+      <div class="cell blk"></div><div class="cell mwht" data-r="0" data-c="1" data-p="pretium" style="--mp-color:var(--c-pretium)">P</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell blk"></div><div class="cell mwht" data-r="1" data-c="1" data-p="pretium" style="--mp-color:var(--c-pretium)">R</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="1" data-c="8" data-p="cece" style="--mp-color:var(--c-cece)">C</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell blk"></div><div class="cell mwht" data-r="2" data-c="1" data-p="pretium" style="--mp-color:var(--c-pretium)">E</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="2" data-c="5" data-p="art" style="--mp-color:var(--c-art)">F</div><div class="cell mwht" data-r="2" data-c="6" data-p="art" style="--mp-color:var(--c-art)">I</div><div class="cell mwht" data-r="2" data-c="7" data-p="art" style="--mp-color:var(--c-art)">N</div><div class="cell mwht" data-r="2" data-c="8" data-p="art" style="--mp-color:var(--c-art)">E</div><div class="cell mwht" data-r="2" data-c="9" data-p="art" style="--mp-color:var(--c-art)">A</div><div class="cell mwht" data-r="2" data-c="10" data-p="art" style="--mp-color:var(--c-art)">R</div><div class="cell mwht" data-r="2" data-c="11" data-p="art" style="--mp-color:var(--c-art)">T</div>
+      <div class="cell blk"></div><div class="cell mwht" data-r="3" data-c="1" data-p="pretium" style="--mp-color:var(--c-pretium)">T</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="3" data-c="8" data-p="cece" style="--mp-color:var(--c-cece)">C</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell mwht" data-r="4" data-c="0" data-p="littlewren" style="--mp-color:var(--c-littlewren)">L</div><div class="cell mwht" data-r="4" data-c="1" data-p="littlewren" style="--mp-color:var(--c-littlewren)">I</div><div class="cell mwht" data-r="4" data-c="2" data-p="littlewren" style="--mp-color:var(--c-littlewren)">T</div><div class="cell mwht" data-r="4" data-c="3" data-p="littlewren" style="--mp-color:var(--c-littlewren)">T</div><div class="cell mwht" data-r="4" data-c="4" data-p="littlewren" style="--mp-color:var(--c-littlewren)">L</div><div class="cell mwht" data-r="4" data-c="5" data-p="littlewren" style="--mp-color:var(--c-littlewren)">E</div><div class="cell mwht" data-r="4" data-c="6" data-p="littlewren" style="--mp-color:var(--c-littlewren)">W</div><div class="cell mwht" data-r="4" data-c="7" data-p="littlewren" style="--mp-color:var(--c-littlewren)">R</div><div class="cell mwht" data-r="4" data-c="8" data-p="littlewren" style="--mp-color:var(--c-littlewren)">E</div><div class="cell mwht" data-r="4" data-c="9" data-p="nomad" style="--mp-color:var(--c-nomad)">N</div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell blk"></div><div class="cell mwht" data-r="5" data-c="1" data-p="pretium" style="--mp-color:var(--c-pretium)">U</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="5" data-c="9" data-p="nomad" style="--mp-color:var(--c-nomad)">O</div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell blk"></div><div class="cell mwht" data-r="6" data-c="1" data-p="pretium" style="--mp-color:var(--c-pretium)">M</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="6" data-c="9" data-p="nomad" style="--mp-color:var(--c-nomad)">M</div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="7" data-c="9" data-p="nomad" style="--mp-color:var(--c-nomad)">A</div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="8" data-c="9" data-p="nomad" style="--mp-color:var(--c-nomad)">D</div><div class="cell blk"></div><div class="cell blk"></div>
+    </div>
+    <div class="mini-eyebrow">Down</div>
+    <a class="mini-clue" data-p="pretium" href="pretium.html"><span class="mn" style="color:var(--c-pretium)">1</span>Pretium</a>
+    <a class="mini-clue" data-p="nomad" href="nomad.html"><span class="mn" style="color:var(--c-nomad)">2</span>Nomad</a>
+    <a class="mini-clue" data-p="cece" href="cece.html"><span class="mn" style="color:var(--c-cece)">3</span>Cece</a>
+    <div class="mini-eyebrow">Across</div>
+    <a class="mini-clue" data-p="art" href="art.html"><span class="mn" style="color:var(--c-art)">1</span>Fine Art</a>
+    <a class="mini-clue" data-p="littlewren" href="littlewren.html"><span class="mn" style="color:var(--c-littlewren)">2</span>Little Wren</a>
+    <a class="about-block" href="about.html">
+      <div class="at">A bit about me</div>
+      <div class="as">Paper, puzzles, and the occasional ceramic bowl.</div>
+      <div class="aa">Get to know me →</div>
+    </a>
     <div class="foot">
       <a href="mailto:gracejermstad@gmail.com">gracejermstad@gmail.com</a>
       <a href="https://www.linkedin.com/in/gracejermstad" target="_blank" rel="noopener">LinkedIn</a>
@@ -312,6 +348,23 @@
   const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in')});},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   document.querySelectorAll('.rail .navlink').forEach(l=>{if(l.getAttribute('data-page')==='pretium')l.classList.add('current')});
+
+  // mini puzzle: click a letter to jump to that project (current page is a no-op, just highlights)
+  const miniUrl={pretium:'pretium.html',nomad:'nomad.html',cece:'cece.html',art:'art.html',littlewren:'littlewren.html'};
+  document.querySelectorAll('.mini-puzzle .cell.mwht').forEach(cell=>{
+    cell.setAttribute('tabindex','0');
+    const go=()=>{ const p=cell.dataset.p; if(p && miniUrl[p]) window.location.href=miniUrl[p]; };
+    cell.addEventListener('click', go);
+    cell.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } });
+    cell.addEventListener('mouseenter', ()=>{
+      const p=cell.dataset.p;
+      document.querySelectorAll(`.mini-puzzle .cell[data-p="${p}"]`).forEach(c=>c.classList.add('mactive'));
+    });
+    cell.addEventListener('mouseleave', ()=>{
+      const p=cell.dataset.p;
+      document.querySelectorAll(`.mini-puzzle .cell[data-p="${p}"]`).forEach(c=>c.classList.remove('mactive'));
+    });
+  });
 </script>
 </body>
 </html>

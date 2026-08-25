@@ -7,67 +7,84 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@300&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#fefefe;--bg2:#f7f5f1;--ink:#2a2419;--muted:#807a6b;--line:#e4ded1;
-    --pink:#e85d8a;--pink-text:#c0345f;
-    --accent:#e85d8a;--accent-text:#c0345f;--accent-soft:#fbe4ec;--accent-deep:#a02347;
-    --body:"Outfit",sans-serif;
+    --pink:#E6007A;--pink-text:#B4005F;
+    --accent:#E6007A;--accent-text:#B4005F;--accent-soft:#fbdcee;--accent-deep:#8a0049;
+    --c-pretium:#24625c;--c-nomad:#e53d68;--c-cece:#8b8ce8;--c-art:#4164ff;--c-littlewren:#7f7e45;
+    --sans:"Work Sans",sans-serif;--headline:"Bitter",serif;--mono:"Space Mono",monospace;
+    --body:var(--sans);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{background:var(--bg);
+    background-image:linear-gradient(rgba(254,254,254,.82),rgba(254,254,254,.82)), url('images/paper-texture.webp');
+    background-repeat:no-repeat,no-repeat;background-size:cover,cover;background-attachment:fixed,fixed;background-position:center,center;
+    color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
   ::selection{background:var(--accent);color:#fff}
-  :focus-visible{outline:3px solid var(--accent-text);outline-offset:3px;border-radius:3px}
+  :focus-visible{outline:3px solid var(--accent-text);outline-offset:3px;border-radius:0}
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
   .shell{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
-  .rail{position:sticky;top:0;height:100vh;padding:40px 32px;display:flex;flex-direction:column;border-right:1px solid var(--line);background:var(--bg);overflow-y:auto}
-  .rail .name{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1.02}
+  .rail{position:sticky;top:0;height:100vh;padding:40px 32px;display:flex;flex-direction:column;border-right:1px solid var(--line);background:rgba(254,254,254,.6);overflow-y:auto}
+  .rail .name{font-family:var(--headline);font-size:1.5rem;font-weight:300;letter-spacing:-.01em;white-space:nowrap}
   .rail .name .dot{color:var(--pink)}
-  .rail .role{font-size:10px;font-weight:500;letter-spacing:2.5px;color:var(--pink-text);margin-top:12px;text-transform:uppercase}
+  .rail .role{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:1.5px;color:var(--pink-text);margin-top:12px;text-transform:uppercase}
   .rail nav{margin-top:36px;display:flex;flex-direction:column;gap:1px}
-  .rail .navgroup{font-size:10px;font-weight:500;letter-spacing:2px;color:var(--muted);margin:16px 0 9px;text-transform:uppercase}
+  .rail .navgroup{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:2px;color:var(--muted);margin:16px 0 9px;text-transform:uppercase}
   .rail .navgroup:first-child{margin-top:0}
   .rail .navlink{display:flex;align-items:baseline;gap:9px;padding:6px 0;font-size:1rem;font-weight:400;color:var(--ink);transition:color .2s,transform .2s}
-  .rail .navlink .idx{font-size:10px;font-weight:500;letter-spacing:1px;color:var(--muted);transition:color .2s;min-width:16px}
+  .rail .navlink .idx{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:1px;color:var(--muted);transition:color .2s;min-width:16px}
   .rail .navlink:hover{transform:translateX(5px);color:var(--accent-text)}
   .rail .navlink:hover .idx{color:var(--accent-text)}
   .rail .navlink.current{color:var(--accent-text);font-weight:600}
   .rail .navlink.current .idx{color:var(--accent-text)}
+
+  .mini-puzzle{display:grid;grid-template-columns:repeat(12,minmax(13px,17px));grid-auto-rows:minmax(13px,17px);gap:0;margin-top:26px}
+  .mini-puzzle .cell{position:relative;font-family:var(--sans);font-weight:600;font-size:8px;
+    display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background .2s,color .2s}
+  .mini-puzzle .cell.blk{background:transparent}
+  .mini-puzzle .cell.mwht{background:#fff;border:1px solid var(--line);cursor:pointer;margin:-1px 0 0 -1px}
+  .mini-puzzle .cell.mwht:hover, .mini-puzzle .cell.mwht.mactive{background:var(--mp-color,var(--pink));color:#fff;border-color:var(--mp-color,var(--pink));z-index:1}
+  .mini-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin:16px 0 5px}
+  .mini-eyebrow:first-of-type{margin-top:16px}
+  .mini-clue{display:flex;align-items:baseline;gap:7px;padding:3px 0;font-size:.85rem;color:var(--ink);transition:color .2s,transform .2s}
+  .mini-clue:hover{transform:translateX(3px);color:var(--accent-text)}
+  .mini-clue .mn{font-family:var(--mono);font-size:10px;font-weight:700}
   .rail .foot{margin-top:auto;padding-top:24px;font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:7px}
   .rail .foot a{transition:color .2s}
   .rail .foot a:hover{color:var(--accent-text)}
   .main{min-width:0}
   .container{max-width:1320px;margin:0 auto;padding:0 clamp(14px,2.5vw,36px)}
   .hero{padding:64px 0 0}
-  .hero .eyebrow{font-size:11px;font-weight:500;letter-spacing:2.5px;color:var(--accent-text);text-transform:uppercase;margin-bottom:22px}
-  .hero h1{font-size:clamp(2.6rem,5.5vw,4.6rem);font-weight:700;letter-spacing:-.03em;line-height:1.02}
+  .hero .eyebrow{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:1.5px;color:var(--accent-text);text-transform:uppercase;margin-bottom:22px}
+  .hero h1{font-family:var(--headline);font-size:clamp(2.6rem,5.5vw,4.6rem);font-weight:300;letter-spacing:-.01em;line-height:1.05}
   .hero h1 .u{color:var(--accent-text)}
   .hero .sub{font-size:clamp(1.05rem,1.6vw,1.3rem);font-weight:300;color:var(--ink);max-width:760px;margin-top:26px;line-height:1.55}
   .hero .sub+.sub{margin-top:16px}
   .section{padding:60px 0}
   .section.split{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:clamp(40px,7vw,120px);align-items:start}
   .section.split .split-head{position:sticky;top:40px}
-  .section .marker{font-size:11px;font-weight:600;letter-spacing:2px;color:var(--accent-text);text-transform:uppercase;margin-bottom:16px}
-  .section h2{font-size:clamp(1.8rem,3vw,2.7rem);font-weight:600;letter-spacing:-.02em;line-height:1.1}
+  .section .marker{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:2px;color:var(--accent-text);text-transform:uppercase;margin-bottom:16px}
+  .section h2{font-family:var(--headline);font-size:clamp(1.8rem,3vw,2.7rem);font-weight:300;letter-spacing:0;line-height:1.16}
   .prose{max-width:820px}
   .prose p{font-size:1.12rem;font-weight:300;color:var(--ink);margin-bottom:18px;line-height:1.65}
   @media(max-width:900px){.section.split{grid-template-columns:1fr;gap:22px}.section.split .split-head{position:static}}
   .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-  .skill{font-size:.9rem;font-weight:400;color:var(--ink);background:var(--accent-soft);border-radius:999px;padding:9px 16px;cursor:default;transition:transform .3s cubic-bezier(.34,1.6,.64,1),background .25s ease,color .25s ease,box-shadow .3s ease;will-change:transform}
+  .skill{font-size:.9rem;font-weight:400;color:var(--ink);background:var(--accent-soft);border-radius:0;padding:9px 16px;cursor:default;transition:transform .3s cubic-bezier(.34,1.6,.64,1),background .25s ease,color .25s ease,box-shadow .3s ease;will-change:transform}
   .skill:hover{background:var(--accent-text);color:#fff;transform:translateY(-4px) scale(1.08) rotate(-2deg);box-shadow:0 10px 22px -10px rgba(232,93,138,.6);animation:skillWiggle .5s ease}
   .skill:nth-child(even):hover{transform:translateY(-4px) scale(1.08) rotate(2deg)}
   @keyframes skillWiggle{0%{transform:translateY(-4px) scale(1.08) rotate(-2deg)}30%{transform:translateY(-4px) scale(1.08) rotate(3deg)}60%{transform:translateY(-4px) scale(1.08) rotate(-2deg)}100%{transform:translateY(-4px) scale(1.08) rotate(-2deg)}}
   @media(prefers-reduced-motion:reduce){.skill:hover,.phototile:hover{animation:none}}
   @media(max-width:800px){}
   @media(max-width:520px){}
-  .connect{background:var(--accent-soft);border-radius:24px;padding:clamp(32px,5vw,60px);margin:20px 0}
+  .connect{background:var(--accent-soft);border-radius:0;padding:clamp(32px,5vw,60px);margin:20px 0}
   .connect h2{margin-bottom:20px}
   .connect p{font-size:1.12rem;font-weight:300;max-width:680px;line-height:1.6;margin-bottom:28px}
   .actions{display:flex;flex-wrap:wrap;gap:14px}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-size:.98rem;font-weight:500;padding:14px 26px;border-radius:999px;transition:transform .2s,background .2s,color .2s}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-size:.98rem;font-weight:500;padding:14px 26px;border-radius:0;transition:transform .2s,background .2s,color .2s}
   .btn.primary{background:var(--accent-text);color:#fff}
   .btn.primary:hover{transform:translateY(-2px)}
   .btn.ghost{background:transparent;border:1.5px solid var(--accent-text);color:var(--accent-text)}
@@ -81,38 +98,44 @@
   @media(max-width:900px){.shell{grid-template-columns:1fr}.rail{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:24px}.hero{padding:40px 0 0}}
 
   .herowrap{display:grid;grid-template-columns:1fr minmax(0,420px);gap:clamp(32px,5vw,72px);align-items:center}
-  .herowrap .headshot{width:100%;border-radius:20px;aspect-ratio:76/90;object-fit:cover;background:var(--bg2)}
+  .herowrap .headshot{width:100%;border-radius:0;aspect-ratio:76/90;object-fit:cover;background:var(--bg2)}
   @media(max-width:820px){.herowrap{grid-template-columns:1fr}.herowrap .headshot{max-width:380px}}
   .phototiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
   @media(max-width:800px){.phototiles{grid-template-columns:1fr 1fr}}
   @media(max-width:460px){.phototiles{grid-template-columns:1fr 1fr}}
-  .phototile{position:relative;aspect-ratio:1/1;border-radius:16px;overflow:hidden;background:var(--bg2);cursor:pointer;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease}
+  .phototile{position:relative;aspect-ratio:1/1;border-radius:0;overflow:hidden;background:var(--bg2);cursor:pointer;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease}
   .phototile img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
   .phototile:hover{transform:translateY(-6px) rotate(-2deg) scale(1.03);box-shadow:0 18px 40px -16px rgba(232,93,138,.45)}
   .phototile:nth-child(even):hover{transform:translateY(-6px) rotate(2deg) scale(1.03)}
   .phototile:hover img{transform:scale(1.1) rotate(1deg)}
   .phototile:active{transform:translateY(-2px) scale(.99)}
-  .phototile::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(42,36,25,.06);border-radius:16px}
+  .phototile::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(42,36,25,.06);border-radius:0}
   .hero .sub b, .prose b{font-weight:600;color:var(--ink)}
 </style>
 </head>
 <body>
 <div class="shell">
   <aside class="rail">
-    <a href="index.html"><div class="name">Grace<br>Jermstad<span class="dot">.</span></div></a>
-    <div class="role">Multidisciplinary Designer</div>
-    <nav>      <div class="navgroup">Case Studies</div>
-      <a class="navlink" href="pretium.html" data-page="pretium"><span class="idx">01</span> Pretium</a>
-      <a class="navlink" href="nomad.html" data-page="nomad"><span class="idx">02</span> Nomad</a>
-      <div class="navgroup">More Work</div>
-      <a class="navlink" href="cece.html" data-page="cece"><span class="idx">03</span> Cece</a>
-      <a class="navlink" href="lakeshore.html" data-page="lakeshore"><span class="idx">04</span> Lakeshore Collective</a>
-      <a class="navlink" href="littlewren.html" data-page="littlewren"><span class="idx">05</span> Little Wren Cafe</a>
-      <a class="navlink" href="koehler.html" data-page="koehler"><span class="idx">06</span> Koehler Industries</a>
-      <a class="navlink" href="art.html" data-page="art"><span class="idx">07</span> Fine Art</a>
-      <div class="navgroup">Info</div>
-      <a class="navlink" href="about.html" data-page="about"><span class="idx">→</span> About</a>
-</nav>
+    <a href="index.html"><div class="name">Grace Jermstad</div></a>
+    <div class="role">Branding &amp; Digital Design · Product &amp; UX/UI</div>
+    <div class="mini-puzzle" id="miniPuzzle" role="img" aria-label="Crossword of Pretium, Nomad, Cece, Fine Art, and Little Wren">
+      <div class="cell blk"></div><div class="cell mwht" data-r="0" data-c="1" data-p="pretium" style="--mp-color:var(--c-pretium)">P</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell blk"></div><div class="cell mwht" data-r="1" data-c="1" data-p="pretium" style="--mp-color:var(--c-pretium)">R</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="1" data-c="8" data-p="cece" style="--mp-color:var(--c-cece)">C</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell blk"></div><div class="cell mwht" data-r="2" data-c="1" data-p="pretium" style="--mp-color:var(--c-pretium)">E</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="2" data-c="5" data-p="art" style="--mp-color:var(--c-art)">F</div><div class="cell mwht" data-r="2" data-c="6" data-p="art" style="--mp-color:var(--c-art)">I</div><div class="cell mwht" data-r="2" data-c="7" data-p="art" style="--mp-color:var(--c-art)">N</div><div class="cell mwht" data-r="2" data-c="8" data-p="art" style="--mp-color:var(--c-art)">E</div><div class="cell mwht" data-r="2" data-c="9" data-p="art" style="--mp-color:var(--c-art)">A</div><div class="cell mwht" data-r="2" data-c="10" data-p="art" style="--mp-color:var(--c-art)">R</div><div class="cell mwht" data-r="2" data-c="11" data-p="art" style="--mp-color:var(--c-art)">T</div>
+      <div class="cell blk"></div><div class="cell mwht" data-r="3" data-c="1" data-p="pretium" style="--mp-color:var(--c-pretium)">T</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="3" data-c="8" data-p="cece" style="--mp-color:var(--c-cece)">C</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell mwht" data-r="4" data-c="0" data-p="littlewren" style="--mp-color:var(--c-littlewren)">L</div><div class="cell mwht" data-r="4" data-c="1" data-p="littlewren" style="--mp-color:var(--c-littlewren)">I</div><div class="cell mwht" data-r="4" data-c="2" data-p="littlewren" style="--mp-color:var(--c-littlewren)">T</div><div class="cell mwht" data-r="4" data-c="3" data-p="littlewren" style="--mp-color:var(--c-littlewren)">T</div><div class="cell mwht" data-r="4" data-c="4" data-p="littlewren" style="--mp-color:var(--c-littlewren)">L</div><div class="cell mwht" data-r="4" data-c="5" data-p="littlewren" style="--mp-color:var(--c-littlewren)">E</div><div class="cell mwht" data-r="4" data-c="6" data-p="littlewren" style="--mp-color:var(--c-littlewren)">W</div><div class="cell mwht" data-r="4" data-c="7" data-p="littlewren" style="--mp-color:var(--c-littlewren)">R</div><div class="cell mwht" data-r="4" data-c="8" data-p="littlewren" style="--mp-color:var(--c-littlewren)">E</div><div class="cell mwht" data-r="4" data-c="9" data-p="nomad" style="--mp-color:var(--c-nomad)">N</div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell blk"></div><div class="cell mwht" data-r="5" data-c="1" data-p="pretium" style="--mp-color:var(--c-pretium)">U</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="5" data-c="9" data-p="nomad" style="--mp-color:var(--c-nomad)">O</div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell blk"></div><div class="cell mwht" data-r="6" data-c="1" data-p="pretium" style="--mp-color:var(--c-pretium)">M</div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="6" data-c="9" data-p="nomad" style="--mp-color:var(--c-nomad)">M</div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="7" data-c="9" data-p="nomad" style="--mp-color:var(--c-nomad)">A</div><div class="cell blk"></div><div class="cell blk"></div>
+      <div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell blk"></div><div class="cell mwht" data-r="8" data-c="9" data-p="nomad" style="--mp-color:var(--c-nomad)">D</div><div class="cell blk"></div><div class="cell blk"></div>
+    </div>
+    <div class="mini-eyebrow">Down</div>
+    <a class="mini-clue" data-p="pretium" href="pretium.html"><span class="mn" style="color:var(--c-pretium)">1</span>Pretium</a>
+    <a class="mini-clue" data-p="nomad" href="nomad.html"><span class="mn" style="color:var(--c-nomad)">2</span>Nomad</a>
+    <a class="mini-clue" data-p="cece" href="cece.html"><span class="mn" style="color:var(--c-cece)">3</span>Cece</a>
+    <div class="mini-eyebrow">Across</div>
+    <a class="mini-clue" data-p="art" href="art.html"><span class="mn" style="color:var(--c-art)">1</span>Fine Art</a>
+    <a class="mini-clue" data-p="littlewren" href="littlewren.html"><span class="mn" style="color:var(--c-littlewren)">2</span>Little Wren</a>
     <div class="foot">
       <a href="mailto:gracejermstad@gmail.com">gracejermstad@gmail.com</a>
       <a href="https://www.linkedin.com/in/gracejermstad" target="_blank" rel="noopener">LinkedIn</a>
@@ -167,7 +190,23 @@
 <script>
   const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in')})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-  document.querySelectorAll('.rail .navlink').forEach(l=>{if(l.getAttribute('href')==='about.html')l.classList.add('current')});
+
+  // mini puzzle: click a letter to jump to that project
+  const miniUrl={pretium:'pretium.html',nomad:'nomad.html',cece:'cece.html',art:'art.html',littlewren:'littlewren.html'};
+  document.querySelectorAll('.mini-puzzle .cell.mwht').forEach(cell=>{
+    cell.setAttribute('tabindex','0');
+    const go=()=>{ const p=cell.dataset.p; if(p && miniUrl[p]) window.location.href=miniUrl[p]; };
+    cell.addEventListener('click', go);
+    cell.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } });
+    cell.addEventListener('mouseenter', ()=>{
+      const p=cell.dataset.p;
+      document.querySelectorAll(`.mini-puzzle .cell[data-p="${p}"]`).forEach(c=>c.classList.add('mactive'));
+    });
+    cell.addEventListener('mouseleave', ()=>{
+      const p=cell.dataset.p;
+      document.querySelectorAll(`.mini-puzzle .cell[data-p="${p}"]`).forEach(c=>c.classList.remove('mactive'));
+    });
+  });
 </script>
 </body>
 </html>
