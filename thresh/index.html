@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grace Jermstad — For Thresh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@300;400&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fefefe;--bg2:#f7f5f1;--ink:#2a2419;--muted:#807a6b;--line:#e4ded1;
+    --pink:#E6007A;--pink-text:#B4005F;
+    --accent:#B4005F;--accent-text:#B4005F;
+    --c-asure:#1568A6;--c-sion:#2E4FD9;--c-pm:#E1601F;
+    --sans:"Work Sans",sans-serif;--headline:"Bitter",serif;--mono:"Space Mono",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);
+    background-image:linear-gradient(rgba(254,254,254,.86),rgba(254,254,254,.86)), url('/images/paper-texture.webp');
+    background-repeat:no-repeat,repeat;background-size:cover,900px;background-attachment:fixed,fixed;background-position:center,center;
+    color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--pink);color:#fff}
+  :focus-visible{outline:3px solid var(--pink-text);outline-offset:3px;border-radius:0}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  button{font-family:inherit;background:none;border:none;cursor:pointer;color:inherit}
+
+  .shell{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+
+  /* ----- RAIL ----- */
+  .rail{position:sticky;top:0;height:100vh;padding:40px 32px;display:flex;flex-direction:column;
+    border-right:1px solid var(--line);background:rgba(254,254,254,.6);overflow-y:auto}
+  .rail .name{font-family:var(--headline);font-size:1.5rem;font-weight:300;letter-spacing:-.01em;line-height:1.1}
+  .rail .role{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:1.5px;color:var(--pink-text);margin-top:12px;text-transform:uppercase}
+  .rail .forkicker{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+  .rail .forkicker b{color:var(--ink);font-weight:600}
+
+  .rail nav{margin-top:22px;display:flex;flex-direction:column;gap:1px}
+  .rail .navgroup{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:2px;color:var(--muted);margin:8px 0 9px;text-transform:uppercase}
+  .rail .navlink{display:flex;align-items:baseline;gap:9px;padding:7px 0;font-size:1rem;font-weight:400;color:var(--ink);transition:color .2s,transform .2s}
+  .rail .navlink .idx{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:1px;color:var(--muted);transition:color .2s;min-width:16px}
+  .rail .navlink:hover{transform:translateX(5px);color:var(--tab-color,var(--pink-text))}
+  .rail .navlink:hover .idx{color:var(--tab-color,var(--pink-text))}
+  .rail .navlink.current{color:var(--tab-color,var(--pink-text));font-weight:600}
+  .rail .navlink.current .idx{color:var(--tab-color,var(--pink-text))}
+
+  .rail .about-block{display:block;margin-top:22px;padding:14px 16px;border:1px solid var(--line);
+    background:rgba(254,254,254,.5);transition:border-color .2s,background .2s,transform .2s}
+  .rail .about-block:hover{border-color:var(--pink-text);background:rgba(254,254,254,.85);transform:translateX(2px)}
+  .rail .about-block .at{font-family:var(--headline);font-size:1.1rem;font-weight:300}
+  .rail .about-block .as{font-size:.76rem;color:var(--muted);margin-top:4px;line-height:1.45}
+  .rail .about-block .aa{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;color:var(--pink-text);margin-top:8px}
+
+  .rail .foot{margin-top:auto;padding-top:24px;font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:7px}
+  .rail .foot a{transition:color .2s}
+  .rail .foot a:hover{color:var(--pink-text)}
+
+  /* ----- MAIN ----- */
+  .main{min-width:0}
+  .container{max-width:1180px;margin:0 auto;padding:0 clamp(14px,2.5vw,36px)}
+
+  .hero{padding:64px 0 0}
+  .hero .eyebrow{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:1.5px;color:var(--pink-text);text-transform:uppercase;margin-bottom:22px}
+  .hero h1{font-family:var(--headline);font-size:clamp(2.6rem,5.6vw,4.4rem);font-weight:300;letter-spacing:-.01em;line-height:1.05;max-width:16ch}
+  .hero .sub{font-size:clamp(1.05rem,1.7vw,1.25rem);font-weight:300;color:var(--ink);max-width:680px;margin-top:22px;line-height:1.5}
+  .hero .credit{font-size:.92rem;font-weight:300;color:var(--muted);max-width:680px;margin-top:20px;line-height:1.6}
+
+  /* ----- TAB BAR ----- */
+  .tabbar{display:flex;gap:clamp(18px,3vw,40px);margin-top:44px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .tab{padding:14px 2px 16px;font-size:1rem;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;
+    margin-bottom:-1px;transition:color .2s,border-color .2s;display:flex;align-items:baseline;gap:9px}
+  .tab .idx{font-family:var(--mono);font-size:10px;color:var(--muted);transition:color .2s}
+  .tab:hover{color:var(--ink)}
+  .tab.active{color:var(--tab-color);border-color:var(--tab-color)}
+  .tab.active .idx{color:var(--tab-color)}
+
+  /* ----- PANELS ----- */
+  .panel{display:none;padding:46px 0 90px;animation:fadeUp .5s ease both}
+  .panel.active{display:block}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .panel .marker{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:2px;color:var(--tab-color);text-transform:uppercase;margin-bottom:16px}
+  .panel h2{font-family:var(--headline);font-size:clamp(2rem,4vw,3rem);font-weight:300;letter-spacing:0;line-height:1.1}
+  .panel .psub{font-size:1.08rem;font-weight:300;color:var(--ink);max-width:680px;margin-top:16px;line-height:1.55}
+
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:36px 0 40px;padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .facts .f .k{font-family:var(--mono);font-size:9.5px;font-weight:400;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:7px}
+  .facts .f .v{font-size:.92rem;font-weight:400;color:var(--ink);line-height:1.4}
+
+  /* ----- CAROUSEL ----- */
+  .carousel{border:1px solid var(--line);background:var(--bg2)}
+  .carousel-frame{position:relative;height:clamp(300px,48vw,520px);display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .carousel-frame .slide{position:absolute;top:0;left:0;width:100%;height:100%;box-sizing:border-box;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;grid-auto-rows:100%;align-items:stretch;justify-items:stretch;gap:14px;opacity:0;padding:22px;transition:opacity .35s ease;pointer-events:none}
+  .carousel-frame .slide.on{opacity:1;position:relative;pointer-events:auto}
+  /* tall images: top-aligned, scroll inside the slide */
+  .carousel-frame .slide.has-tall{overflow-y:auto;overflow-x:hidden;grid-auto-rows:auto;align-items:start;scrollbar-width:thin;scrollbar-color:var(--muted) transparent}
+  .carousel-frame .slide.has-tall img{height:auto;object-fit:initial}
+  .carousel-frame .slide.has-tall::-webkit-scrollbar{width:8px}
+  .carousel-frame .slide.has-tall::-webkit-scrollbar-thumb{background:var(--line)}
+  .carousel-frame .slide img{width:100%;height:100%;min-width:0;min-height:0;object-fit:contain;cursor:zoom-in;transition:transform .25s ease}
+  .carousel-frame .slide img:hover{transform:scale(1.015)}
+  .carousel-frame .zoom-hint{position:absolute;bottom:12px;right:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--muted);
+    background:rgba(254,254,254,.82);border:1px solid var(--line);padding:4px 8px;pointer-events:none;opacity:0;transition:opacity .2s ease;text-transform:uppercase;z-index:2}
+  .carousel:hover .zoom-hint{opacity:1}
+  .carousel-frame:has(.slide.on.has-tall) .zoom-hint{opacity:1}
+
+  /* ----- LIGHTBOX ----- */
+  .lightbox{position:fixed;inset:0;background:rgba(24,20,17,.94);z-index:100;display:none;align-items:center;justify-content:center;padding:5vh 5vw}
+  .lightbox.open{display:flex}
+  .lightbox-inner{display:flex;flex-direction:column;align-items:center;max-width:min(1200px,90vw);max-height:90vh}
+  .lightbox-images{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);grid-auto-rows:100%;align-items:stretch;gap:18px;width:90vw;height:76vh}
+  .lightbox-images img{width:100%;height:100%;min-width:0;min-height:0;object-fit:contain;cursor:zoom-out}
+  .lightbox-images.has-tall{overflow-y:auto;grid-auto-rows:auto;align-items:start;scrollbar-width:thin}
+  .lightbox-images.has-tall img{height:auto;object-fit:initial}
+  .lightbox-cap{font-family:var(--sans);font-size:.88rem;color:#e7e2d8;margin-top:18px;text-align:center;max-width:64ch}
+  .lightbox-count{font-family:var(--mono);font-size:11px;color:#a99;color:#c9c2b4;letter-spacing:.5px;margin-top:8px}
+  .lightbox-close{position:absolute;top:22px;right:26px;width:40px;height:40px;border:1px solid rgba(255,255,255,.3);color:#f3f0ea;
+    font-size:20px;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s}
+  .lightbox-close:hover{border-color:#fff;color:#fff}
+  .lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:1px solid rgba(255,255,255,.3);
+    color:#f3f0ea;font-size:20px;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s}
+  .lightbox-prev{left:18px}.lightbox-next{right:18px}
+  .lightbox-prev:hover,.lightbox-next:hover{border-color:#fff;color:#fff}
+  @media(max-width:640px){.lightbox-prev,.lightbox-next{width:36px;height:36px;font-size:17px}.lightbox-close{width:34px;height:34px;top:14px;right:14px}}
+
+  .carousel-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;border-top:1px solid var(--line)}
+  .carousel-count{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.5px;white-space:nowrap}
+  .carousel-controls{display:flex;gap:8px}
+  .carousel-controls button{width:34px;height:34px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;transition:border-color .2s,color .2s}
+  .carousel-controls button:hover{border-color:var(--tab-color);color:var(--tab-color)}
+  .carousel-cap{font-size:.88rem;color:var(--muted);padding:0 18px 18px;line-height:1.5;max-width:60ch}
+
+  .tools-line{margin-top:34px;font-size:.88rem;color:var(--muted)}
+  .tools-line b{color:var(--ink);font-weight:500}
+
+  /* ----- MOBILE ----- */
+  @media(max-width:900px){
+    .shell{grid-template-columns:1fr}
+    .rail{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:26px 22px}
+    .rail nav{margin-top:18px}
+    .rail .foot{margin-top:22px}
+    .hero{padding:40px 0 0}
+    .facts{grid-template-columns:1fr 1fr;gap:18px}
+    .tabbar{gap:20px}
+  }
+  @media(max-width:480px){.facts{grid-template-columns:1fr}}
+
+  /* ----- LOCK SCREEN ----- */
+  body.locked{overflow:hidden}
+  body.locked .shell{display:none}
+  .lock-screen{position:fixed;inset:0;z-index:200;background:var(--bg);
+    background-image:linear-gradient(rgba(254,254,254,.86),rgba(254,254,254,.86)), url('/images/paper-texture.webp');
+    background-repeat:no-repeat,repeat;background-size:cover,900px;background-position:center,center;
+    display:flex;align-items:center;justify-content:center;padding:24px}
+  .lock-card{max-width:380px;width:100%;border:1px solid var(--line);background:rgba(254,254,254,.75);padding:38px 34px}
+  .lock-card .lk-name{font-family:var(--headline);font-size:1.6rem;font-weight:300;letter-spacing:-.01em}
+  .lock-card .lk-label{font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin:10px 0 24px}
+  .lock-card input[type=password]{width:100%;padding:12px 14px;border:1px solid var(--line);background:#fff;
+    font-family:var(--sans);font-size:1rem;color:var(--ink);margin-bottom:14px}
+  .lock-card input[type=password]:focus-visible{outline:3px solid var(--pink-text);outline-offset:2px}
+  .lock-card button{width:100%;padding:12px 14px;background:var(--pink);color:#fff;font-family:var(--sans);
+    font-weight:600;font-size:.95rem;border:1px solid var(--pink);cursor:pointer;transition:opacity .2s}
+  .lock-card button:hover{opacity:.88}
+  .lock-error{color:var(--pink-text);font-size:.85rem;margin-top:12px;display:none}
+  .lock-error.show{display:block}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="lock-screen" id="lockScreen" role="dialog" aria-modal="true" aria-label="Password protected">
+  <div class="lock-card">
+    <div class="lk-name">Grace Jermstad</div>
+    <div class="lk-label">This page is password protected</div>
+    <form id="lockForm">
+      <input type="password" id="lockInput" placeholder="Password" autocomplete="off">
+      <button type="submit">Enter</button>
+      <p class="lock-error" id="lockError">That's not it — try again.</p>
+    </form>
+  </div>
+</div>
+<script>
+  (function(){
+    var PASSWORD = "thresh";
+    var body = document.body;
+    body.classList.add('locked');
+    var lockScreen = document.getElementById('lockScreen');
+    var form = document.getElementById('lockForm');
+    var input = document.getElementById('lockInput');
+    var error = document.getElementById('lockError');
+    if(sessionStorage.getItem('thUnlocked') === '1'){ unlock(); }
+    else { setTimeout(function(){ input.focus(); }, 50); }
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(input.value.trim().toLowerCase() === PASSWORD){
+        sessionStorage.setItem('thUnlocked','1');
+        unlock();
+      } else {
+        error.classList.add('show');
+        input.value='';
+        input.focus();
+      }
+    });
+    function unlock(){
+      body.classList.remove('locked');
+      lockScreen.style.display='none';
+    }
+  })();
+</script>
+
+<div class="shell">
+
+  <!-- ===== RAIL ===== -->
+  <aside class="rail">
+    <div class="top">
+      <div class="name">Grace Jermstad</div>
+      <div class="role">Branding &amp; Digital Design · Product &amp; UX/UI</div>
+      <div class="forkicker">Prepared for <b>Thresh</b></div>
+    </div>
+
+    <nav>
+      <div class="navgroup">Web &amp; landing work</div>
+      <a class="navlink" data-tab="asure" href="#asure" style="--tab-color:var(--c-asure)"><span class="idx">01</span>Asure</a>
+      <a class="navlink" data-tab="sion" href="#sion" style="--tab-color:var(--c-sion)"><span class="idx">02</span>Sion</a>
+      <a class="navlink" data-tab="pm" href="#pm" style="--tab-color:var(--c-pm)"><span class="idx">03</span>Pratt Miller</a>
+    </nav>
+
+    <a class="about-block" href="https://gracejermstad.com" target="_blank" rel="noopener">
+      <div class="at">Full portfolio</div>
+      <div class="as">Branding, product, and UX/UI work.</div>
+      <div class="aa">gracejermstad.com →</div>
+    </a>
+
+    <div class="foot">
+      <a href="mailto:gracejermstad@gmail.com">gracejermstad@gmail.com</a>
+      <a href="https://www.linkedin.com/in/gracejermstad" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main">
+    <div class="container">
+      <section class="hero">
+        <div class="eyebrow">Web &amp; landing page work</div>
+        <h1>Hey Thresh!</h1>
+        <p class="sub">Here are a few examples of my web and landing page work — three sites,
+        all shipped in 2025 while at Basedon: a SaaS platform, an investor-facing site, and a
+        campaign landing page.</p>
+      </section>
+
+      <nav class="tabbar">
+        <button class="tab active" data-tab="asure" style="--tab-color:var(--c-asure)"><span class="idx">01</span>Asure</button>
+        <button class="tab" data-tab="sion" style="--tab-color:var(--c-sion)"><span class="idx">02</span>Sion</button>
+        <button class="tab" data-tab="pm" style="--tab-color:var(--c-pm)"><span class="idx">03</span>Pratt Miller</button>
+      </nav>
+    </div>
+
+    <!-- ===== ASURE PANEL ===== -->
+    <div class="container">
+      <section class="panel active" id="asure" style="--tab-color:var(--c-asure)">
+        <div class="marker">01 — SaaS Platform</div>
+        <h2>Asure</h2>
+        <p class="psub">Designed and built a scalable website system for a SaaS company,
+        developing visual direction, a full component library, and 18 responsive pages under a
+        tight timeline.</p>
+
+        <div class="facts">
+          <div class="f"><div class="k">Client</div><div class="v">Asure</div></div>
+          <div class="f"><div class="k">Studio</div><div class="v">Basedon</div></div>
+          <div class="f"><div class="k">My role</div><div class="v">Designer — direction, system, 18 pages</div></div>
+          <div class="f"><div class="k">Year</div><div class="v">2025</div></div>
+        </div>
+
+        <div class="carousel" data-carousel style="--tab-color:var(--c-asure)">
+          <div class="carousel-frame">
+            <span class="zoom-hint">Click to zoom</span>
+            <div class="slide on"><img src="/images/kz-asure-hero.jpg" alt="Asure homepage hero — Flexible HCM with fully managed service"></div>
+            <div class="slide">
+              <img src="/images/kz-asure-direction-1.jpg" alt="Asure direction exploration — annotated spec version">
+              <img src="/images/kz-asure-direction-2.jpg" alt="Asure direction exploration — dashboard graphic version">
+              <img src="/images/kz-asure-direction-3.jpg" alt="Asure direction exploration — centered layout version">
+            </div>
+            <div class="slide"><img src="/images/kz-asure-features.jpg" alt="Asure homepage feature section — Flexibility, Fully Managed Service, Connected Ecosystem"></div>
+            <div class="slide"><img src="/images/kz-asure-solutions.jpg" alt="Asure Solutions Hub page"></div>
+            <div class="slide">
+              <img src="/images/kz-asure-contact.jpg" alt="Asure Contact page">
+              <img src="/images/kz-asure-resource.jpg" alt="Asure gated resource detail page — 2025 HR Benchmark Report">
+            </div>
+            <div class="slide">
+              <img src="/images/kz-asure-buttons.jpg" alt="Asure component library — button variants, sizes, and states">
+              <img src="/images/kz-asure-tokens.jpg" alt="Asure design tokens — brand colors and neutral ramp">
+            </div>
+          </div>
+          <p class="carousel-cap" data-cap>The hero fold. Asure came in with a logo and a color palette — this is the visual direction that got approved.</p>
+          <div class="carousel-bar">
+            <span class="carousel-count" data-count>01 / 06</span>
+            <div class="carousel-controls">
+              <button data-prev aria-label="Previous image">‹</button>
+              <button data-next aria-label="Next image">›</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="tools-line"><b>Skills &amp; tools:</b> Figma, design systems, component libraries, responsive web design, UI/UX design, visual design, developer handoff, CSS naming systems, collaboration.</p>
+      </section>
+    </div>
+
+    <!-- ===== SION PANEL ===== -->
+    <div class="container">
+      <section class="panel" id="sion" style="--tab-color:var(--c-sion)">
+        <div class="marker">02 — Investor-Ready Site</div>
+        <h2>Sion</h2>
+        <p class="psub">Designed and prototyped a full website experience for Sion, translating
+        complex battery technology into a clear, investor-ready digital narrative.</p>
+
+        <div class="facts">
+          <div class="f"><div class="k">Client</div><div class="v">Sion</div></div>
+          <div class="f"><div class="k">Studio</div><div class="v">Basedon</div></div>
+          <div class="f"><div class="k">My role</div><div class="v">Designer — architecture, system, prototype</div></div>
+          <div class="f"><div class="k">Year</div><div class="v">2025</div></div>
+        </div>
+
+        <div class="carousel" data-carousel style="--tab-color:var(--c-sion)">
+          <div class="carousel-frame">
+            <span class="zoom-hint">Click to zoom</span>
+            <div class="slide on"><img src="/images/kz-sion-hero.jpg" alt="Sion homepage hero — Licerion, unlocking the potential of lithium metal"></div>
+            <div class="slide"><img src="/images/kz-sion-icons.jpg" alt="Sion applications section with custom-designed iconography"></div>
+            <div class="slide"><img src="/images/kz-sion-wireframes.jpg" alt="Sion site wireframes across eight page types"></div>
+            <div class="slide"><img src="/images/kz-sion-full-design.jpg" alt="The fully designed Sion site across all eight pages"></div>
+            <div class="slide"><img src="/images/kz-sion-prototype-flow.jpg" alt="Interactive Figma prototype flow with animated transitions"></div>
+          </div>
+          <p class="carousel-cap" data-cap>Eight page types, wireframed from Sion's written content before a single pixel of visual design.</p>
+          <div class="carousel-bar">
+            <span class="carousel-count" data-count>01 / 04</span>
+            <div class="carousel-controls">
+              <button data-prev aria-label="Previous image">‹</button>
+              <button data-next aria-label="Next image">›</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="tools-line"><b>Skills &amp; tools:</b> Figma, wireframing, UX/UI design, information architecture, prototyping, interaction design, visual design, custom icon design, branded AI image generation, storytelling, collaboration.</p>
+      </section>
+    </div>
+
+    <!-- ===== PRATT MILLER PANEL ===== -->
+    <div class="container">
+      <section class="panel" id="pm" style="--tab-color:var(--c-pm)">
+        <div class="marker">03 — Campaign Landing Page</div>
+        <h2>Pratt Miller</h2>
+        <p class="psub">Designed a high-conversion campaign landing page for a targeted LinkedIn
+        campaign, balancing clarity, speed, and strong calls-to-action within an existing brand
+        system.</p>
+
+        <div class="facts">
+          <div class="f"><div class="k">Client</div><div class="v">Pratt Miller</div></div>
+          <div class="f"><div class="k">Studio</div><div class="v">Basedon</div></div>
+          <div class="f"><div class="k">My role</div><div class="v">Designer — landing page, mobile-first build</div></div>
+          <div class="f"><div class="k">Year</div><div class="v">2025</div></div>
+        </div>
+
+        <div class="carousel" data-carousel style="--tab-color:var(--c-pm)">
+          <div class="carousel-frame">
+            <span class="zoom-hint">Click to zoom</span>
+            <div class="slide on"><img src="/images/kz-prattmiller-hero.jpg" alt="Pratt Miller campaign landing page hero"></div>
+            <div class="slide"><img src="/images/kz-prattmiller-specsheet.jpg" alt="Full responsive system — general landing, solutions sections, and mobile breakpoints"></div>
+            <div class="slide"><img src="/images/kz-prattmiller-mobile.jpg" alt="Pratt Miller landing page on mobile"></div>
+            <div class="slide"><img src="/images/kz-prattmiller-detail.jpg" alt="Closer look at the accordion sections, innovations carousel, and partner form"></div>
+          </div>
+          <p class="carousel-cap" data-cap>The campaign hero — built for a LinkedIn audience with seconds of attention to give.</p>
+          <div class="carousel-bar">
+            <span class="carousel-count" data-count>01 / 04</span>
+            <div class="carousel-controls">
+              <button data-prev aria-label="Previous image">‹</button>
+              <button data-next aria-label="Next image">›</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="tools-line"><b>Skills &amp; tools:</b> Figma, UX/UI design, conversion-focused design, responsive design, mobile-first design, information hierarchy, developer collaboration, marketing campaign design.</p>
+      </section>
+    </div>
+
+  </main>
+</div>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lbClose" aria-label="Close">×</button>
+  <button class="lightbox-prev" id="lbPrev" aria-label="Previous image">‹</button>
+  <button class="lightbox-next" id="lbNext" aria-label="Next image">›</button>
+  <div class="lightbox-inner">
+    <div class="lightbox-images" id="lbImages"></div>
+    <p class="lightbox-cap" id="lbCap"></p>
+    <p class="lightbox-count" id="lbCount"></p>
+  </div>
+</div>
+
+<script>
+  // ---- Tabs ----
+  const tabs = document.querySelectorAll('.tab, .navlink');
+  const panels = document.querySelectorAll('.panel');
+
+  function activate(name){
+    document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
+    document.querySelectorAll('.navlink').forEach(t=>t.classList.toggle('current', t.dataset.tab===name));
+    panels.forEach(p=>p.classList.toggle('active', p.id===name));
+  }
+
+  tabs.forEach(t=>{
+    t.addEventListener('click', e=>{
+      if(t.classList.contains('navlink')) e.preventDefault();
+      activate(t.dataset.tab);
+    });
+  });
+
+  const CAPS = {"asure": ["The hero fold. Asure came in with a logo and a color palette \u2014 this is the visual direction that got approved.", "Early direction exploration \u2014 three different visual takes on the hero before landing on the final system.", "The homepage feature section \u2014 flexibility, fully managed service, and a connected ecosystem, each with its own supporting visual.", "The Solutions Hub \u2014 one of 18 pages built on the same system.", "Two of the supporting pages: the contact form and a gated resource page for the 2025 HR Benchmark Report.", "The component library and design tokens \u2014 buttons, states, and the brand's color and type primitives, documented for handoff."], "sion": ["The homepage hero \u2014 branded AI-generated imagery, art-directed to fit Sion's world, paired with the Licerion headline.", "Custom iconography, designed from scratch for each application: passenger EV, commercial fleets, performance vehicles.", "Eight page types, wireframed from Sion's written content before a single pixel of visual design.", "The full site, fully designed in color across all eight pages.", "The interactive Figma prototype map \u2014 animated transitions, used live in Sion's funding presentation."], "pm": ["The landing page \u2014 built for a targeted LinkedIn campaign, prioritizing clarity and a strong call to action.", "The full system: general landing, condensed and expanded solutions sections, and every mobile breakpoint, mapped for developer handoff.", "Mobile-first, since most of this campaign's traffic arrived on a phone.", "A closer look at the accordion sections, the innovations carousel, and the partner form."]};
+  // ---- Carousels ----
+  const carousels = [];
+  const lightbox = document.getElementById('lightbox');
+  const lbImages = document.getElementById('lbImages');
+  const lbCap = document.getElementById('lbCap');
+  const lbCount = document.getElementById('lbCount');
+  let activeState = null;
+
+  document.querySelectorAll('[data-carousel]').forEach(car=>{
+    const slides = Array.from(car.querySelectorAll('.carousel-frame .slide'));
+    const capEl = car.querySelector('[data-cap]');
+    const countEl = car.querySelector('[data-count]');
+    const color = getComputedStyle(car).getPropertyValue('--tab-color').trim();
+    const state = { car, slides, i: 0, color };
+    function render(){
+      slides.forEach((el,idx)=>el.classList.toggle('on', idx===state.i));
+      slides[state.i].scrollTop = 0;
+      const hint = car.querySelector('.zoom-hint');
+      if(hint){ hint.textContent = slides[state.i].classList.contains('has-tall') ? 'Scroll to see more · click to zoom' : 'Click to zoom'; }
+      const firstImg = slides[state.i].querySelector('img');
+      capEl.textContent = (CAPS[car.closest('.panel').id] || [])[state.i] || (firstImg ? firstImg.getAttribute('alt') : '');
+      countEl.textContent = String(state.i+1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
+      if(lightbox.classList.contains('open') && activeState===state) renderLightbox();
+    }
+    state.render = render;
+    car.querySelector('[data-prev]').addEventListener('click', ()=>{ state.i=(state.i-1+slides.length)%slides.length; render(); });
+    car.querySelector('[data-next]').addEventListener('click', ()=>{ state.i=(state.i+1)%slides.length; render(); });
+    slides.forEach(slide=>{
+      slide.querySelectorAll('img').forEach(img=>img.addEventListener('click', ()=>openLightbox(state)));
+    });
+    render();
+    carousels.push(state);
+  });
+
+  // ---- Tall images: top-align + scroll ----
+  const TALL = 1.25;
+  function tagTall(img){
+    if(!img.naturalWidth) return;
+    if(img.naturalHeight/img.naturalWidth > TALL){
+      img.classList.add('tall');
+      const slide = img.closest('.slide');
+      if(slide){
+        slide.classList.add('has-tall');
+        const hint = slide.parentElement.querySelector('.zoom-hint');
+        if(hint && !hint.dataset.base) hint.dataset.base = hint.textContent;
+      }
+    }
+  }
+  document.querySelectorAll('.carousel-frame .slide img').forEach(img=>{
+    if(img.complete) tagTall(img); else img.addEventListener('load', ()=>tagTall(img));
+  });
+
+  // ---- Lightbox ----
+  function renderLightbox(){
+    const imgsList = Array.from(activeState.slides[activeState.i].querySelectorAll('img'));
+    lbImages.innerHTML = '';
+    lbImages.classList.toggle('has-tall', imgsList.some(im=>im.classList.contains('tall')));
+    lbImages.scrollTop = 0;
+    imgsList.forEach(im=>{
+      const clone = document.createElement('img');
+      clone.src = im.src;
+      clone.alt = im.getAttribute('alt') || '';
+      clone.addEventListener('click', closeLightbox);
+      lbImages.appendChild(clone);
+    });
+    lbCap.textContent = (CAPS[activeState.car.closest('.panel').id] || [])[activeState.i] || '';
+    lbCount.textContent = String(activeState.i+1).padStart(2,'0') + ' / ' + String(activeState.slides.length).padStart(2,'0');
+  }
+  function openLightbox(state){
+    activeState = state;
+    renderLightbox();
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+  function lbPrev(){ if(!activeState) return; activeState.i=(activeState.i-1+activeState.slides.length)%activeState.slides.length; activeState.render(); renderLightbox(); }
+  function lbNext(){ if(!activeState) return; activeState.i=(activeState.i+1)%activeState.slides.length; activeState.render(); renderLightbox(); }
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', lbPrev);
+  document.getElementById('lbNext').addEventListener('click', lbNext);
+  lightbox.addEventListener('click', e=>{ if(e.target===lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e=>{
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key==='Escape') closeLightbox();
+    if(e.key==='ArrowLeft') lbPrev();
+    if(e.key==='ArrowRight') lbNext();
+  });
+</script>
+</body>
+</html>
